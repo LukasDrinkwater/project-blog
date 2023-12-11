@@ -2,23 +2,23 @@ const mongoose = require("mongoose");
 
 const Schema = mongoose.Schema;
 
-// Object link to author
-// title
-// Blog content
-// Timestamps TRUE
-// Published TRUE/FALSE
+// Blog
+// User
+// Text
+// Timestamp true
 
-const BlogSchema = new Schema(
+const CommentSchema = new Schema(
   {
-    author: { type: Schema.Types.ObjectId, ref: "Author", required: true },
-    title: { type: String, required: true },
-    content: { type: String, required: true },
-    published: { type: Boolean, required: true },
+    blog: { type: Schema.Types.ObjectId, ref: "Blog", required: true },
+    user: { type: Schema.Types.ObjectId, ref: "User", required: true },
+    text: { type: String, required: true },
   },
   { timestamps: true }
 );
 
-BlogSchema.virtual("createdAtFormatted").get(function () {
+// virtuals
+
+CommentSchema.virtual("createdAtFormatted").get(function () {
   const createdAt = this.createdAt;
 
   // Format the createdAt timestamp using toLocaleString
@@ -35,5 +35,4 @@ BlogSchema.virtual("createdAtFormatted").get(function () {
 
   return formattedCreatedAt;
 });
-
-module.exports = mongoose.model("Blog", BlogSchema);
+module.exports = mongoose.model("Comment", CommentSchema);

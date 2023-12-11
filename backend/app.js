@@ -4,19 +4,22 @@ const path = require("path");
 const cookieParser = require("cookie-parser");
 const logger = require("morgan");
 
+// Import Routes
 const indexRouter = require("./routes/index");
 const usersRouter = require("./routes/users");
+const blogRouter = require("./routes/blogRoutes");
 
 const app = express();
 
 // Middleware setup
 app.use(logger("dev"));
 app.use(express.json());
-app.use(express.urlencoded({ extended: false }));
+app.use(express.urlencoded({ extended: true })); //set to true for JSON
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, "public")));
 
 // Routes setup
+app.use("/api", blogRouter);
 app.use("/", indexRouter);
 app.use("/users", usersRouter);
 
