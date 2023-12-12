@@ -3,6 +3,7 @@ const express = require("express");
 const path = require("path");
 const cookieParser = require("cookie-parser");
 const logger = require("morgan");
+const cors = require("cors");
 
 // Import Routes
 const indexRouter = require("./routes/index");
@@ -17,6 +18,13 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true })); //set to true for JSON
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, "public")));
+app.use(
+  cors({
+    origin: "http://localhost:5173",
+    methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
+    credentials: true,
+  })
+);
 
 // Routes setup
 app.use("/api", blogRouter);
