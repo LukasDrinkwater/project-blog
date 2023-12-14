@@ -7,6 +7,7 @@ const Schema = mongoose.Schema;
 // Last name
 // Username
 // Email
+// country
 // admin TRUE/FALSE
 
 const UserSchema = new Schema({
@@ -14,6 +15,7 @@ const UserSchema = new Schema({
   last_name: { type: String, required: true },
   username: { type: String, required: true },
   email: { type: String, required: true },
+  country: { type: String, required: true },
   admin: { type: Boolean, required: true },
 });
 

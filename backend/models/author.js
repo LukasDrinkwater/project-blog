@@ -12,4 +12,8 @@ const AuthorSchema = new Schema({
   country: { type: String, required: true },
 });
 
+AuthorSchema.virtual("url").get(function () {
+  return `/api/authors/${this._id}`;
+});
+
 module.exports = mongoose.model("Author", AuthorSchema);

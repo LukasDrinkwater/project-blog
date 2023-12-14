@@ -18,6 +18,10 @@ const CommentSchema = new Schema(
 
 // virtuals
 
+CommentSchema.virtual("url").get(function () {
+  return `/api/blogs/comments/${this._id}}`;
+});
+
 CommentSchema.virtual("createdAtFormatted").get(function () {
   const createdAt = this.createdAt;
 

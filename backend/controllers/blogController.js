@@ -1,6 +1,6 @@
 const Blog = require("../models/blog");
 const Author = require("../models/author");
-const Comment = require("../models/comments");
+const Comment = require("../models/comment");
 const User = require("../models/user");
 
 const { body, validationResult } = require("express-validator");
@@ -9,22 +9,152 @@ const asyncHandler = require("express-async-handler");
 // GET all blogs
 exports.blog_list = asyncHandler(async (req, res, next) => {
   // const allBlogs = await Blog.find()
-  //   .populate("Author")
+  // .populate("User")
   //   .sort({ createdAt: 1 })
   //   .exec();
 
+  const allBlogs = await Blog.find().exec();
+
   console.log("here");
-  res.json({ message: "HELLO IM WORKING IN JSON" });
+  res.json({ allBlogs });
+  // res.json({ message: "HERERERERERE" });
 });
 
 // GET specific blog
+exports.blog_detail = asyncHandler(async (req, res, next) => {
+  // MAYBE CHANGE THIS BIT
+  // Get details of blog and all the comments
+  const [blog, allComments] = await Promise.all([
+    Blog.findById(req.params.id).exec(),
+    Comment.find({ blog: req.params.id }).sort({ createdAt: -1 }),
+  ]);
 
-// POST new blog
+  if (blog === null) {
+    const err = new Error("Blog not found");
+    err.status(404);
+    return next(err);
+  }
 
-// GET request to update blog
+  res.json({ blog, comments: allComments });
+});
 
-// POST request to update blog
+// POST create new blog
+exports.blog_create_post = [
+  // validate and sanitise fields
+  body("author")
+    .trim()
+    .isLength({ min: 1 })
+    .withMessage("An author must be selected")
+    .escape(),
+  body("title")
+    .trim()
+    .isLength({ min: 1 })
+    .withMessage("Blog must have a title.")
+    .escape(),
+  body("content").trim().isLength({ min: 1 }).escape(),
+  body("published").isBoolean().escape(),
+
+  asyncHandler(async (req, res, next) => {
+    // Extract validation errors
+    const errors = validationResult(req);
+
+    // create the new blog object with checked data
+    const blog = new Blog({
+      author: req.body.author,
+      title: req.body.title,
+      content: req.body.content,
+      published: req.body.published,
+    });
+
+    if (!errors.isEmpty()) {
+      // There were errors
+      errors.array();
+      res.json({ blog, errors });
+      return;
+    } else {
+      // Data from the form is valid. Save new blog.
+      await blog.save();
+      res.location(blog.url);
+      res.status(201).send();
+    }
+  }),
+];
 
 // GET request to delete blog
 
 // POST reqiest to delete blog
+
+exports.blog_delete_post = asyncHandler(async (req, res, next) => {
+  const [blog, allComments] = await Promise.all([
+    Blog.findById(req.params.id).exec(),
+    Comment.find({ blog: req.params.id }).exec(),
+  ]);
+
+  await Blog.findByIdAndRemove(req.body.blogId);
+
+  await Comment.findByIdAndRemove({ blog: req.body.blogId });
+
+  res.location("/api/blogs");
+  res.status(410).send();
+});
+
+// GET request to update blog
+exports.blog_update_get = asyncHandler(async (req, res, next) => {
+  const blog = await Blog.findById(req.params.id).exec();
+
+  if (blog === null) {
+    // No results
+    const err = new Error("Blog not found");
+    err.status = 404;
+    return next(err);
+  }
+
+  if (blog.posted === true) {
+    blog.posted.checked = "true";
+  }
+
+  res.json(blog);
+});
+
+// POST request to update blog
+
+exports.blog_update_post = [
+  // Validate and sanitise fields
+  body("author")
+    .trim()
+    .isLength({ min: 1 })
+    .withMessage("An author must be selected")
+    .escape(),
+  body("title")
+    .trim()
+    .isLength({ min: 1 })
+    .withMessage("Blog must have a title.")
+    .escape(),
+  body("content").trim().isLength({ min: 1 }).escape(),
+  body("published").isBoolean().escape(),
+
+  asyncHandler(async (req, res, next) => {
+    const errors = validationResult(req);
+
+    const blog = new Blog({
+      author: req.body.author,
+      title: req.body.title,
+      content: req.body.content,
+      published: req.body.published,
+    });
+
+    if (!errors.isEmpty()) {
+      // Errors send back data
+      errors.array();
+
+      res.status(400).json(blog, errors);
+    } else {
+      // Data is valid, update blog
+
+      await Blog.findByIdAndUpdate(req.params.id, blog, {});
+
+      res.location(blog.url);
+      res.status(201).send();
+    }
+  }),
+];

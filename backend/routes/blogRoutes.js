@@ -3,7 +3,10 @@ var router = express.Router();
 
 const blogController = require("../controllers/blogController");
 
-/* GET home page. */
-router.get("/blogs", blogController.blog_list);
+// GET list of all blogs
+router.get("/", blogController.blog_list);
+
+// GET create blog
+router.get("/blog", blogController.blog_update_get);
 
 module.exports = router;

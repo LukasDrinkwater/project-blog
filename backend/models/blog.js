@@ -1,8 +1,7 @@
 const mongoose = require("mongoose");
-
 const Schema = mongoose.Schema;
 
-// Object link to author
+// Object link to user
 // title
 // Blog content
 // Timestamps TRUE
@@ -10,13 +9,17 @@ const Schema = mongoose.Schema;
 
 const BlogSchema = new Schema(
   {
-    author: { type: Schema.Types.ObjectId, ref: "Author", required: true },
+    user: { type: Schema.Types.ObjectId, ref: "User", required: true },
     title: { type: String, required: true },
     content: { type: String, required: true },
     published: { type: Boolean, required: true },
   },
   { timestamps: true }
 );
+
+BlogSchema.virtual("url").get(function () {
+  return `/api/blogs/${this._id}`;
+});
 
 BlogSchema.virtual("createdAtFormatted").get(function () {
   const createdAt = this.createdAt;

@@ -4,6 +4,7 @@ const path = require("path");
 const cookieParser = require("cookie-parser");
 const logger = require("morgan");
 const cors = require("cors");
+require("dotenv").config();
 
 // Import Routes
 const indexRouter = require("./routes/index");
@@ -11,6 +12,17 @@ const usersRouter = require("./routes/users");
 const blogRouter = require("./routes/blogRoutes");
 
 const app = express();
+
+// setup the mongoose mongoDB connection
+const mongoose = require("mongoose");
+mongoose.set("strictQuery", false);
+const mongoDB = process.env.MONGODB_STRING;
+
+main().catch((err) => console.log(err));
+async function main() {
+  await mongoose.connect(mongoDB);
+}
+console.log(mongoose.connection.readyState);
 
 // Middleware setup
 app.use(logger("dev"));
@@ -27,7 +39,7 @@ app.use(
 );
 
 // Routes setup
-app.use("/api", blogRouter);
+app.use("/blogs", blogRouter);
 app.use("/", indexRouter);
 app.use("/users", usersRouter);
 
