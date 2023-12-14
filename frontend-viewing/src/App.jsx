@@ -1,9 +1,12 @@
 import { useState } from "react";
 import { Route, Routes } from "react-router-dom";
+
 import "./App.css";
 
 // IMPORT COMPONENTS
 import { TestApi } from "./components/testapi";
+import { Header } from "./components/header/header";
+import BlogList from "./components/pages/allBlogs";
 
 function App() {
   const [count, setCount] = useState(0);
@@ -19,8 +22,9 @@ function App() {
         </p>
       </div>
       <div className="content">
+        <Header />
         <Routes>
-          <Route path="/api/blogs" element={<TestApi />} />
+          <Route path="/blogs" Component={BlogList}></Route>
         </Routes>
       </div>
     </>
