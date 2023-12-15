@@ -7,6 +7,7 @@ import "./App.css";
 import { TestApi } from "./components/testapi";
 import { Header } from "./components/header/header";
 import BlogList from "./components/pages/allBlogs";
+import SingleBlog from "./components/pages/singleBlog";
 
 function App() {
   const [count, setCount] = useState(0);
@@ -25,6 +26,7 @@ function App() {
         <Header />
         <Routes>
           <Route path="/blogs" Component={BlogList}></Route>
+          <Route path="/blogs/:blogId" Component={SingleBlog} />
         </Routes>
       </div>
     </>
