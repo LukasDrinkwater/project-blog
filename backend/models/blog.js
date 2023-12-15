@@ -14,7 +14,8 @@ const BlogSchema = new Schema(
     content: { type: String, required: true },
     published: { type: Boolean, required: true },
   },
-  { timestamps: true }
+  { timestamps: true },
+  { toJSON: { virtuals: true } }
 );
 
 BlogSchema.virtual("url").get(function () {

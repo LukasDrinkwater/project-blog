@@ -6,11 +6,14 @@ const Schema = mongoose.Schema;
 // Last name
 // Country
 
-const AuthorSchema = new Schema({
-  first_name: { type: String, required: true },
-  last_name: { type: String, required: true },
-  country: { type: String, required: true },
-});
+const AuthorSchema = new Schema(
+  {
+    first_name: { type: String, required: true },
+    last_name: { type: String, required: true },
+    country: { type: String, required: true },
+  },
+  { toJSON: { virtuals: true } }
+);
 
 AuthorSchema.virtual("url").get(function () {
   return `/api/authors/${this._id}`;
