@@ -1,6 +1,6 @@
 // Component that renders the blog
 
-function Blog({ blog }) {
+function BlogDetail({ blog }) {
   const blogContent = blog.content;
   return (
     <div className="blogContainer">
@@ -8,3 +8,5 @@ function Blog({ blog }) {
     </div>
   );
 }
+
+export default BlogDetail;

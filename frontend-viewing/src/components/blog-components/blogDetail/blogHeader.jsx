@@ -1,12 +1,14 @@
 // Header that is on the blog page
 
-function BlogHeader({ blogTitle, blogAuthor, country, dateTimeCreated }) {
+function BlogHeader({ blog }) {
   return (
     <div className="blogHeader">
-      <h1>{blogTitle}</h1>
-      <p>{blogAuthor}</p>
-      <p>{country}</p>
-      <p>{dateTimeCreated}</p>
+      <h1>{blog.title}</h1>
+      <p>{blog.user.fullName}</p>
+      <p>{blog.user.country}</p>
+      <p>{blog.createdAtFormatted}</p>
     </div>
   );
 }
+
+export default BlogHeader;
