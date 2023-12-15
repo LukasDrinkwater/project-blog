@@ -8,15 +8,15 @@ const asyncHandler = require("express-async-handler");
 
 // GET all blogs
 exports.blog_list = asyncHandler(async (req, res, next) => {
-  // const allBlogs = await Blog.find()
-  // .populate("User")
-  //   .sort({ createdAt: 1 })
-  //   .exec();
+  const allBlogs = await Blog.find()
+    .populate("user")
+    .sort({ createdAt: 1 })
+    .exec();
 
-  const allBlogs = await Blog.find().exec();
+  // const allBlogs = await Blog.find().exec();
 
   console.log("here");
-  res.json({ allBlogs });
+  res.json(allBlogs);
   // res.json({ message: "HERERERERERE" });
 });
 
@@ -25,9 +25,12 @@ exports.blog_detail = asyncHandler(async (req, res, next) => {
   // MAYBE CHANGE THIS BIT
   // Get details of blog and all the comments
   const [blog, allComments] = await Promise.all([
-    Blog.findById(req.params.id).exec(),
-    Comment.find({ blog: req.params.id }).sort({ createdAt: -1 }),
+    Blog.findById(req.params.blogId).populate("user").exec(),
+    Comment.find({ blog: req.params.blogId })
+      .populate("user")
+      .sort({ createdAt: -1 }),
   ]);
+  // console.log(blog);
 
   if (blog === null) {
     const err = new Error("Blog not found");
