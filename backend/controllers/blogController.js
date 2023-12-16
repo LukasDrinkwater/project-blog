@@ -13,24 +13,18 @@ exports.blog_list = asyncHandler(async (req, res, next) => {
     .sort({ createdAt: 1 })
     .exec();
 
-  // const allBlogs = await Blog.find().exec();
-
   console.log("here");
   res.json(allBlogs);
-  // res.json({ message: "HERERERERERE" });
 });
 
 // GET specific blog
 exports.blog_detail = asyncHandler(async (req, res, next) => {
-  // MAYBE CHANGE THIS BIT
-  // Get details of blog and all the comments
   const [blog, allComments] = await Promise.all([
     Blog.findById(req.params.blogId).populate("user").exec(),
     Comment.find({ blog: req.params.blogId })
       .populate("user")
       .sort({ createdAt: -1 }),
   ]);
-  // console.log(blog);
 
   if (blog === null) {
     const err = new Error("Blog not found");
@@ -85,8 +79,7 @@ exports.blog_create_post = [
 
 // GET request to delete blog
 
-// POST reqiest to delete blog
-
+// POST request to delete blog
 exports.blog_delete_post = asyncHandler(async (req, res, next) => {
   const [blog, allComments] = await Promise.all([
     Blog.findById(req.params.id).exec(),
@@ -119,7 +112,7 @@ exports.blog_update_get = asyncHandler(async (req, res, next) => {
   res.json(blog);
 });
 
-// POST request to update blog
+// POST request to update blogreus17#
 
 exports.blog_update_post = [
   // Validate and sanitise fields

@@ -44,6 +44,7 @@ async function userCreate(
   first_name,
   last_name,
   username,
+  password,
   country,
   email,
   admin
@@ -52,6 +53,7 @@ async function userCreate(
     first_name: first_name,
     last_name: last_name,
     username: username,
+    password: password,
     country: country,
     email: email,
     admin: admin,
@@ -89,7 +91,7 @@ async function commentCreate(index, blog, user, text) {
   console.log(`Added comment: ${blog} ${user} ${text}`);
 }
 
-// First name, Last name, Username, country, Email, admin
+// First name, Last name, Username, password, country, Email, admin
 async function createUsers() {
   console.log("Adding messages");
   await Promise.all([
@@ -98,6 +100,7 @@ async function createUsers() {
       "John",
       "Doe",
       "johndoe123",
+      "12345",
       "England",
       "johndoe@email.com",
       true
@@ -107,6 +110,7 @@ async function createUsers() {
       "Jane",
       "Doe",
       "janedoe123",
+      "12345",
       "Wales",
       "janedoe@email.com",
       false
