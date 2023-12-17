@@ -8,7 +8,12 @@ require("dotenv").config();
 // Requirements for passport
 const session = require("express-session");
 const passport = require("passport");
+// const LocalStrategy = require("passport-local");
 const LocalStrategy = require("passport-local").Strategy;
+const bcrypt = require("bcryptjs");
+
+// Model import
+const User = require("./models/user");
 
 // Import Routes
 const indexRouter = require("./routes/index");
@@ -32,7 +37,7 @@ console.log(mongoose.connection.readyState);
 // Middleware setup
 app.use(logger("dev"));
 app.use(express.json());
-app.use(express.urlencoded({ extended: true })); //set to true for JSON
+// app.use(express.urlencoded({ extended: false })); //set to true for JSON
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, "public")));
 app.use(
@@ -45,17 +50,59 @@ app.use(
 );
 // Middleware setup for passport
 const SECRET_STRING = process.env.SECRET_STRING;
+
+// Passport local strategy
+// This function is what will be called when using passport.authenticate()
+passport.use(
+  new LocalStrategy(async (username, password, done) => {
+    try {
+      const user = await User.findOne({ username: username });
+      if (!user) {
+        return done(null, false, { message: "Incorrect username" });
+      }
+      const match = await bcrypt.compare(password, user.password);
+      if (!match) {
+        // passwords do not match!
+        return done(null, false, { message: "Incorrect password" });
+      }
+      return done(null, user);
+    } catch (err) {
+      return done(err);
+    }
+  })
+);
+// sessions and serialization
+passport.serializeUser((user, done) => {
+  done(null, user.id);
+});
+passport.deserializeUser(async (id, done) => {
+  try {
+    const user = await User.findById(id);
+    done(null, user);
+  } catch (err) {
+    done(err);
+  }
+});
 app.use(
   session({ secret: SECRET_STRING, resave: false, saveUninitialized: true })
 );
 app.use(passport.initialize());
 app.use(passport.session());
+app.use(express.urlencoded({ extended: false })); //set to true for JSON
+
+// app.post(
+//   "/login",
+//   passport.authenticate("local", {
+//     successRedirect: "http://localhost:5173/blogs",
+//     failureRedirect: "http://localhost:5173/login",
+//   })
+// );
 
 // Routes setup
-app.use("/blogs", blogRouter);
-app.use("/", indexRouter);
-app.use("/users", usersRouter);
 app.use("/", authRoutes);
+app.use("/blogs", blogRouter);
+// app.use("/", indexRouter);
+app.use("/users", usersRouter);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
