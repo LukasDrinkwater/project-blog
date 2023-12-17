@@ -2,6 +2,9 @@ const { body, validationResult } = require("express-validator");
 const asyncHandler = require("express-async-handler");
 const User = require("../models/user");
 
+// Passport imports
+const passport = require("passport");
+
 exports.signup_attempt_post = asyncHandler(async (req, res, next) => {
   try {
     console.log("signing up");
@@ -14,11 +17,34 @@ exports.signup_attempt_post = asyncHandler(async (req, res, next) => {
       country: req.body.country,
       admin: req.body.admin,
     });
-    const result = await user.save();
+    console.log("made user");
+    await user.save();
     res.location("/blogs");
   } catch (err) {
     return next(err);
   }
+});
+
+exports.login_attempt_post = asyncHandler(async (req, res, next) => {
+  // .authenticate looks at the request body for parameters named username
+  //  and password then runs the LocalStrategy function
+  console.log("checking");
+  passport.authenticate("local", {
+    successRedirect: "/blogs",
+    failureRedirect: "/login",
+  });
+  console.log("checked?");
+  next();
+});
+
+// Logout
+exports.logout_get = asyncHandler(async (req, res, next) => {
+  req.logout((err) => {
+    if (err) {
+      return next(err);
+    }
+    res.location("http://localhost:5173/login");
+  });
 });
 
 // first_name: { type: String, required: true },
