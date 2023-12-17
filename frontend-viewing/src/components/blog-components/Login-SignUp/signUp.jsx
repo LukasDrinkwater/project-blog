@@ -11,7 +11,7 @@ function SignUp() {
     <div className="signUpContainer">
       <h1>Sign up</h1>
       <div className="signUpFormContainer">
-        <form action="" method="POST">
+        <form action="http://localhost:3000/signup" method="POST">
           <label htmlFor="firstName">First Name</label>
           <input
             name="firstName"
