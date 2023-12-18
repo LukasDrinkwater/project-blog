@@ -3,6 +3,12 @@ import { useState } from "react";
 
 function SignUp() {
   const [isChecked, setIsChecked] = useState(true);
+  const [firstName, setFirstName] = useState("James");
+  const [lastName, setLastName] = useState("Doe");
+  const [username, setUsername] = useState("jamesdoe123");
+  const [password, setPassword] = useState("12345");
+  const [email, setEmail] = useState("jamesdoe@email.coom");
+  const [country, setCountry] = useState("Scotland");
 
   const changeTickBox = () => {
     setIsChecked(!isChecked);
@@ -15,39 +21,56 @@ function SignUp() {
           <label htmlFor="firstName">First Name</label>
           <input
             name="firstName"
+            id="firstName"
             type="text"
             placeholder=""
-            value="James"
+            value={firstName}
+            onChange={(e) => setFirstName(e.target.value)}
           ></input>
           <label htmlFor="lastName">Last Name</label>
-          <input name="lastName" type="text" placeholder="" value="Doe"></input>
+          <input
+            id="lastName"
+            name="lastName"
+            type="text"
+            placeholder=""
+            value={lastName}
+            onChange={(e) => setLastName(e.target.value)}
+          ></input>
           <label htmlFor="username">Username</label>
           <input
             name="username"
+            id="username"
             type="text"
             placeholder=""
-            value="JamesDoe123"
+            value={username}
+            onChange={(e) => setUsername(e.target.value)}
           ></input>
           <label htmlFor="password">Password</label>
           <input
             name="password"
+            id="password"
             type="password"
             placeholder=""
-            value="12345"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
           ></input>
           <label htmlFor="email">Email Address</label>
           <input
             name="email"
+            id="email"
             type="email"
             placeholder=""
-            value="jamesdoe@email.com"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
           ></input>
           <label htmlFor="country">Country</label>
           <input
             name="country"
+            id="country"
             type="text"
             placeholder=""
-            value="England"
+            value={country}
+            onChange={(e) => setCountry(e.target.value)}
           ></input>
           <input type="checkbox" checked={isChecked} onChange={changeTickBox} />
           <button type="submit">Signup</button>
