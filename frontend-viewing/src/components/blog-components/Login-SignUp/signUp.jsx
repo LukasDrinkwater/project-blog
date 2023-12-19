@@ -1,5 +1,6 @@
 // Component to handle the signup form
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 function SignUp() {
   const [firstName, setFirstName] = useState("James");
@@ -10,14 +11,52 @@ function SignUp() {
   const [country, setCountry] = useState("Scotland");
   const [isChecked, setIsChecked] = useState(true);
 
+  const navigate = useNavigate();
+
   const changeTickBox = () => {
     setIsChecked(!isChecked);
   };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    try {
+      const response = await fetch("http://localhost:3000/signup", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          firstName,
+          lastName,
+          username,
+          password,
+          email,
+          country,
+          admin: isChecked,
+        }),
+      });
+      console.log("response");
+      console.log(response);
+
+      if (response.ok) {
+        console.log("User created");
+        // Redirect
+        navigate("/login");
+      } else {
+        console.error("Error creating user:", response.status);
+      }
+    } catch (error) {
+      console.error("Error:", error.message);
+    }
+  };
+
   return (
     <div className="signUpContainer">
       <h1>Sign up</h1>
       <div className="signUpFormContainer">
-        <form action="http://localhost:3000/signup" method="POST">
+        {/* <form action="http://localhost:3000/signup" method="POST"> */}
+        <form onSubmit={handleSubmit}>
           <label htmlFor="firstName">First Name</label>
           <input
             name="firstName"
