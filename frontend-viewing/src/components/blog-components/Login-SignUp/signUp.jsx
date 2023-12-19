@@ -2,13 +2,13 @@
 import { useState } from "react";
 
 function SignUp() {
-  const [isChecked, setIsChecked] = useState(true);
   const [firstName, setFirstName] = useState("James");
   const [lastName, setLastName] = useState("Doe");
   const [username, setUsername] = useState("jamesdoe123");
   const [password, setPassword] = useState("12345");
   const [email, setEmail] = useState("jamesdoe@email.coom");
   const [country, setCountry] = useState("Scotland");
+  const [isChecked, setIsChecked] = useState(true);
 
   const changeTickBox = () => {
     setIsChecked(!isChecked);
@@ -72,7 +72,15 @@ function SignUp() {
             value={country}
             onChange={(e) => setCountry(e.target.value)}
           ></input>
-          <input type="checkbox" checked={isChecked} onChange={changeTickBox} />
+          <label htmlFor="admin">Admin</label>
+          <input
+            name="admin"
+            id="admin"
+            type="checkbox"
+            checked={isChecked}
+            value={isChecked}
+            onChange={changeTickBox}
+          />
           <button type="submit">Signup</button>
         </form>
       </div>
