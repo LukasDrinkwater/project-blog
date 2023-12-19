@@ -11,36 +11,36 @@ const passport = require("passport");
 // });
 
 exports.signup_attempt_post = [
-  // body("firstName")
-  //   .trim()
-  //   .isLength({ min: 1 })
-  //   .withMessage("First Name is required")
-  //   .escape(),
-  // body("lastName")
-  //   .trim()
-  //   .isLength({ min: 1 })
-  //   .withMessage("Last name is required")
-  //   .escape(),
-  // body("username")
-  //   .trim()
-  //   .isLength({ min: 1 })
-  //   .withMessage("Username is required")
-  //   .escape(),
-  // body("password")
-  //   .trim()
-  //   .isLength({ min: 5 })
-  //   .withMessage("Password must be atleast 5 characters")
-  //   .escape(),
-  // body("email")
-  //   .trim()
-  //   .isLength({ min: 1 })
-  //   .isEmail()
-  //   .withMessage("Must be a valid email address"),
-  // body("country")
-  //   .trim()
-  //   .isLength({ min: 1 })
-  //   .withMessage("Country is required")
-  //   .escape(),
+  body("firstName")
+    .trim()
+    .isLength({ min: 1 })
+    .withMessage("First Name is required")
+    .escape(),
+  body("lastName")
+    .trim()
+    .isLength({ min: 1 })
+    .withMessage("Last name is required")
+    .escape(),
+  body("username")
+    .trim()
+    .isLength({ min: 1 })
+    .withMessage("Username is required")
+    .escape(),
+  body("password")
+    .trim()
+    .isLength({ min: 5 })
+    .withMessage("Password must be atleast 5 characters")
+    .escape(),
+  body("email")
+    .trim()
+    .isLength({ min: 1 })
+    .isEmail()
+    .withMessage("Must be a valid email address"),
+  body("country")
+    .trim()
+    .isLength({ min: 1 })
+    .withMessage("Country is required")
+    .escape(),
   // body("admin").escape(),
   asyncHandler(async (req, res, next) => {
     const errors = validationResult(req);
@@ -62,9 +62,9 @@ exports.signup_attempt_post = [
       });
       await user.save();
       console.log("user saved");
-      res.status(210).location("http://localhost:5173/login");
+      res.redirect(301, "http://localhost:5173/login");
+      // https://stackoverflow.com/questions/33020603/redirect-after-post-using-reactjs
     }
-    res.json({ message: "trying to signup" });
   }),
 ];
 
