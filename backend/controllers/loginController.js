@@ -5,11 +5,6 @@ const User = require("../models/user");
 // Passport imports
 const passport = require("passport");
 
-// exports.signup_attempt_post = asyncHandler(async (req, res, next) => {
-//   console.log("signing up");
-//   res.json({ message: "attemping signup" });
-// });
-
 exports.signup_attempt_post = [
   body("firstName")
     .trim()
@@ -60,10 +55,10 @@ exports.signup_attempt_post = [
         country: req.body.country,
         admin: req.body.admin,
       });
+      console.log("saving user");
       await user.save();
       console.log("user saved");
-      res.redirect(301, "http://localhost:5173/login");
-      // https://stackoverflow.com/questions/33020603/redirect-after-post-using-reactjs
+      res.status(201).send("User created successfully");
     }
   }),
 ];
@@ -76,12 +71,13 @@ exports.login_attempt_post = passport.authenticate("local", {
 });
 
 // Logout
-exports.logout_get = asyncHandler(async (req, res, next) => {
+exports.logout_post = asyncHandler(async (req, res, next) => {
+  console.log("user", req.user);
   req.logout((err) => {
     if (err) {
       return next(err);
     }
-    res.location("http://localhost:5173/login");
+    res.redirect(200, "http://localhost:5173/login");
   });
 });
 

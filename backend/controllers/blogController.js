@@ -13,7 +13,6 @@ exports.blog_list = asyncHandler(async (req, res, next) => {
     .sort({ createdAt: 1 })
     .exec();
 
-  console.log("here");
   res.json(allBlogs);
 });
 

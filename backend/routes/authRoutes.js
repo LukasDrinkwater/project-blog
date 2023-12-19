@@ -12,7 +12,7 @@ router.post("/login", loginController.login_attempt_post);
 // alternate
 // router.post("/login", authenticate.authenticate_login);
 
-// GET logout request
-router.get("/logout", loginController.logout_get);
+// POST logout request
+router.post("/logout", loginController.logout_post);
 
 module.exports = router;
