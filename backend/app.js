@@ -90,14 +90,6 @@ app.use(passport.initialize());
 app.use(passport.session());
 app.use(express.urlencoded({ extended: false })); //set to true for JSON
 
-// app.post(
-//   "/login",
-//   passport.authenticate("local", {
-//     successRedirect: "http://localhost:5173/blogs",
-//     failureRedirect: "http://localhost:5173/login",
-//   })
-// );
-
 // Routes setup
 app.use("/", authRoutes);
 app.use("/blogs", blogRouter);
