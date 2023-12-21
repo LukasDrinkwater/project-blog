@@ -4,7 +4,7 @@ import { Route, Routes } from "react-router-dom";
 import "./App.css";
 
 // IMPORT COMPONENTS
-import { TestApi } from "./components/testapi";
+
 import { Header } from "./components/header/header";
 import BlogList from "./components/pages/allBlogs";
 import SingleBlog from "./components/pages/singleBlog";
