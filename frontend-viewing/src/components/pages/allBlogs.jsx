@@ -9,7 +9,14 @@ function BlogList() {
   const [allBlogs, setAllBlogs] = useState([]);
 
   useEffect(() => {
-    fetch("http://localhost:3000/blogs")
+    fetch("http://localhost:3000/blogs", {
+      credentials: "include",
+      mode: "cors",
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    })
       .then((response) => response.json())
       .then((data) => {
         setAllBlogs(data);
