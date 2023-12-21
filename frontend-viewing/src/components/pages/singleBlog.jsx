@@ -10,7 +10,13 @@ function SingleBlog() {
   const { blogId } = useParams();
 
   useEffect(() => {
-    fetch(`http://localhost:3000/blogs/${blogId}`, { credentials: "include" })
+    fetch(`http://localhost:3000/blogs/${blogId}`, {
+      credentials: "include",
+      mode: "cors",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    })
       .then((response) => response.json())
       .then((data) => {
         setBlog(data);

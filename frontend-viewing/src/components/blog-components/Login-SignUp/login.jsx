@@ -14,7 +14,7 @@ function Login() {
 
     try {
       const response = await fetch("http://localhost:3000/login", {
-        // credentials: "include",
+        credentials: "include",
         mode: "cors",
         method: "POST",
         headers: {
