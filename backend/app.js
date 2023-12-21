@@ -11,6 +11,8 @@ const passport = require("passport");
 // const LocalStrategy = require("passport-local");
 const LocalStrategy = require("passport-local").Strategy;
 const bcrypt = require("bcryptjs");
+// JWT
+const jwt = require("jsonwebtoken");
 
 // Model import
 const User = require("./models/user");
@@ -46,10 +48,10 @@ app.use(
     origin: "http://localhost:5173",
     methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
     credentials: true,
+    allowedHeaders: ["Content-Type", "Authorization"],
   })
 );
 // Middleware setup for passport
-const SECRET_STRING = process.env.SECRET_STRING;
 
 // Passport local strategy
 // This function is what will be called when using passport.authenticate()
@@ -83,6 +85,7 @@ passport.deserializeUser(async (id, done) => {
     done(err);
   }
 });
+const SECRET_STRING = process.env.SECRET_STRING;
 app.use(
   session({ secret: SECRET_STRING, resave: false, saveUninitialized: true })
 );

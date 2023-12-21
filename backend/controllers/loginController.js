@@ -65,18 +65,48 @@ exports.signup_attempt_post = [
 
 // .authenticate looks at the request body for parameters named username
 //  and password then runs the LocalStrategy function
-exports.login_attempt_post = passport.authenticate("local", {
-  successRedirect: "http://localhost:5173/blogs",
-  failureRedirect: "http://localhost:5173/login",
-});
+// this way works if its just a normal POST not a fetch POST
+// exports.login_attempt_post = passport.authenticate("local", {
+//   successRedirect: "http://localhost:5173/blogs",
+//   failureRedirect: "http://localhost:5173/login",
+// });
+
+exports.login_attempt_post = (req, res, next) => {
+  passport.authenticate("local", (err, user, info) => {
+    console.log(req.session);
+    if (err) {
+      return res.status(500).send("Internal Server Error");
+    }
+
+    if (!user) {
+      return res.status(501).json({ error: info.message });
+    }
+
+    return res.status(200).send();
+  })(req, res, next);
+};
 
 // Logout
+// exports.logout_post = asyncHandler(async (req, res, next) => {
+//   console.log("user", req.user);
+//   req.logout((err) => {
+//     if (err) {
+//       return next(err);
+//     }
+//     res.redirect(200, "http://localhost:5173/login");
+//   });
+// });
+
 exports.logout_post = asyncHandler(async (req, res, next) => {
-  console.log("user", req.user);
+  console.log("user before logout:", req.user);
+
   req.logout((err) => {
     if (err) {
       return next(err);
     }
+
+    console.log("user after logout:", req.user); // Add this line to log the user after logout
+
     res.redirect(200, "http://localhost:5173/login");
   });
 });
