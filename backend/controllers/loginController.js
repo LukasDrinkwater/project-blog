@@ -73,7 +73,7 @@ exports.signup_attempt_post = [
 
 exports.login_attempt_post = (req, res, next) => {
   passport.authenticate("local", (err, user, info) => {
-    console.log(req.session);
+    console.log(req.user);
     if (err) {
       return res.status(500).send("Internal Server Error");
     }
@@ -82,7 +82,14 @@ exports.login_attempt_post = (req, res, next) => {
       return res.status(501).json({ error: info.message });
     }
 
-    return res.status(200).send();
+    req.logIn(user, (err) => {
+      if (err) {
+        return res.status(501).json({ error: info.message });
+      }
+      return res.status(200).send();
+    });
+
+    // return res.status(200).send();
   })(req, res, next);
 };
 
