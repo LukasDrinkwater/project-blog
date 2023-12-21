@@ -12,7 +12,6 @@ const passport = require("passport");
 const LocalStrategy = require("passport-local").Strategy;
 const bcrypt = require("bcryptjs");
 // JWT
-const jwt = require("jsonwebtoken");
 
 // Model import
 const User = require("./models/user");
@@ -51,6 +50,10 @@ app.use(
     allowedHeaders: ["Content-Type", "Authorization"],
   })
 );
+const SECRET_STRING = process.env.SECRET_STRING;
+app.use(
+  session({ secret: SECRET_STRING, resave: false, saveUninitialized: true })
+);
 // Middleware setup for passport
 
 // Passport local strategy
@@ -75,9 +78,11 @@ passport.use(
 );
 // sessions and serialization
 passport.serializeUser((user, done) => {
+  console.log("serialize");
   done(null, user.id);
 });
 passport.deserializeUser(async (id, done) => {
+  console.log("deserialize");
   try {
     const user = await User.findById(id);
     done(null, user);
@@ -85,13 +90,9 @@ passport.deserializeUser(async (id, done) => {
     done(err);
   }
 });
-const SECRET_STRING = process.env.SECRET_STRING;
-app.use(
-  session({ secret: SECRET_STRING, resave: false, saveUninitialized: true })
-);
+app.use(express.urlencoded({ extended: false })); //set to true for JSON
 app.use(passport.initialize());
 app.use(passport.session());
-app.use(express.urlencoded({ extended: false })); //set to true for JSON
 
 // Routes setup
 app.use("/", authRoutes);
