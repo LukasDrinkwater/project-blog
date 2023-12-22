@@ -71,50 +71,24 @@ exports.signup_attempt_post = [
 //   failureRedirect: "http://localhost:5173/login",
 // });
 
-exports.login_attempt_post = (req, res, next) => {
-  passport.authenticate("local", (err, user, info) => {
-    console.log(req.user);
-    if (err) {
-      return res.status(500).send("Internal Server Error");
-    }
-
-    if (!user) {
-      return res.status(501).json({ error: info.message });
-    }
-
-    req.logIn(user, (err) => {
-      if (err) {
-        return res.status(501).json({ error: info.message });
-      }
-      return res.status(200).send();
-    });
-
-    // return res.status(200).send();
-  })(req, res, next);
-};
-
 // Logout
-// exports.logout_post = asyncHandler(async (req, res, next) => {
-//   console.log("user", req.user);
-//   req.logout((err) => {
-//     if (err) {
-//       return next(err);
-//     }
-//     res.redirect(200, "http://localhost:5173/login");
-//   });
-// });
-
 exports.logout_post = asyncHandler(async (req, res, next) => {
-  console.log("user before logout:", req.user);
-
+  console.log("user", req.user);
   req.logout((err) => {
     if (err) {
       return next(err);
     }
-
-    console.log("user after logout:", req.user); // Add this line to log the user after logout
-
-    res.redirect(200, "http://localhost:5173/login");
+    // res.redirect(200, "http://localhost:5173/login");
+    console.log("cookie cleared");
+    res
+      .status(200)
+      .clearCookie("connect.sid", { path: "/" })
+      // .clearCookie("connect.sid", {
+      //   sameSite: false,
+      //   secure: false,
+      //   httpOnly: true,
+      // })
+      .json({ message: "User logged out" });
   });
 });
 
