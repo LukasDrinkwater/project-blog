@@ -10,10 +10,13 @@ function Header() {
 
     try {
       const response = await fetch("http://localhost:3000/logout", {
+        withCredentials: true,
+        credentials: "include",
+        // mode: "cors",
         method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
+        // headers: {
+        //   "Content-Type": "application/json",
+        // },
       });
       if (response.ok) {
         navigate("/login");
