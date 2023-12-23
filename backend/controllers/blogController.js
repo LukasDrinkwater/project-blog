@@ -8,7 +8,7 @@ const asyncHandler = require("express-async-handler");
 
 // GET all blogs
 exports.blog_list = asyncHandler(async (req, res, next) => {
-  console.log("get blogs", req.user);
+  // console.log("get blogs", req.user);
   const allBlogs = await Blog.find()
     .populate("user")
     .sort({ createdAt: 1 })
@@ -19,6 +19,7 @@ exports.blog_list = asyncHandler(async (req, res, next) => {
 
 // GET specific blog
 exports.blog_detail = asyncHandler(async (req, res, next) => {
+  // console.log(req.user);
   const [blog, allComments] = await Promise.all([
     Blog.findById(req.params.blogId).populate("user").exec(),
     Comment.find({ blog: req.params.blogId })
@@ -32,7 +33,7 @@ exports.blog_detail = asyncHandler(async (req, res, next) => {
     return next(err);
   }
 
-  res.json({ blog, comments: allComments });
+  res.json({ blog, comments: allComments, user: req.user });
 });
 
 // POST create new blog

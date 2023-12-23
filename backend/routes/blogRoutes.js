@@ -3,6 +3,8 @@ var router = express.Router();
 
 const blogController = require("../controllers/blogController");
 
+const { checkLoggedIn } = require("../strategies/authentication");
+
 // GET list of all blogs
 router.get("/", blogController.blog_list);
 

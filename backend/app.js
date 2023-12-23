@@ -78,11 +78,11 @@ passport.use(
 );
 // sessions and serialization
 passport.serializeUser((user, done) => {
-  console.log("serialize");
+  // console.log("serialize");
   done(null, user.id);
 });
 passport.deserializeUser(async (id, done) => {
-  console.log("deserialize");
+  // console.log("deserialize");
   try {
     const user = await User.findById(id);
     done(null, user);

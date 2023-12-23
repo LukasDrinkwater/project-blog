@@ -10,4 +10,20 @@ const login = (req, res) => {
   res.status(200).json({ message: "Login successful", user: req.user });
 };
 
-module.exports = login;
+const checkLoggedIn = (req, res, next) => {
+  if (req.user) {
+    console.log(req.user);
+    return next();
+  }
+  res.status(403).json({ message: "You need to be logged in." });
+};
+
+const checkAdmin = (req, res, next) => {
+  if (req.user.admin) {
+    console.log(req.user);
+    return next();
+  }
+  res.status(403).json({ message: "User is not admin" });
+};
+
+module.exports = { login, checkLoggedIn };

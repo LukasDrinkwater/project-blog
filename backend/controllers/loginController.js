@@ -40,7 +40,6 @@ exports.signup_attempt_post = [
   asyncHandler(async (req, res, next) => {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
-      console.log("user signup error");
       res.status(422).location("http://localhost:5173/signup");
       return;
     } else {
@@ -73,21 +72,15 @@ exports.signup_attempt_post = [
 
 // Logout
 exports.logout_post = asyncHandler(async (req, res, next) => {
-  console.log("user", req.user);
   req.logout((err) => {
+    // req.session.destroy() to destroy the cookie
+    req.session.destroy();
     if (err) {
       return next(err);
     }
-    // res.redirect(200, "http://localhost:5173/login");
-    console.log("cookie cleared");
     res
       .status(200)
-      .clearCookie("connect.sid", { path: "/" })
-      // .clearCookie("connect.sid", {
-      //   sameSite: false,
-      //   secure: false,
-      //   httpOnly: true,
-      // })
+      .clearCookie("connect.sid") //dont need any options because I havnt set any
       .json({ message: "User logged out" });
   });
 });
