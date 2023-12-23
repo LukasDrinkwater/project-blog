@@ -12,6 +12,7 @@ function SingleBlog() {
   useEffect(() => {
     fetch(`http://localhost:3000/blogs/${blogId}`, {
       credentials: "include",
+      method: "GET",
       mode: "cors",
       headers: {
         "Content-Type": "application/json",

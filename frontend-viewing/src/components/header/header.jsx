@@ -14,9 +14,9 @@ function Header() {
         credentials: "include",
         // mode: "cors",
         method: "POST",
-        // headers: {
-        //   "Content-Type": "application/json",
-        // },
+        headers: {
+          "Content-Type": "application/json",
+        },
       });
       if (response.ok) {
         navigate("/login");
