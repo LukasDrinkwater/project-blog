@@ -42,13 +42,16 @@ function Login() {
         setShowLogin(false);
         console.log("showLogin", showLogin);
         // Redirect
-        navigate("/blogs");
+        if (!showLogin) {
+          navigate("/blogs");
+        }
       } else {
         console.error("Error logging in:", response.status);
       }
     } catch (error) {
       console.error("Error:", error.message);
     }
+    console.log("showLogin", showLogin);
   };
 
   return (
