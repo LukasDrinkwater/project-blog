@@ -5,6 +5,14 @@ const User = require("../models/user");
 // Passport imports
 const passport = require("passport");
 
+exports.check_if_user_logged_in = asyncHandler(async (req, res, next) => {
+  if (req.isAuthenticated) {
+    next();
+  } else {
+    res.json({ message: "Please login for full access." });
+  }
+});
+
 exports.signup_attempt_post = [
   body("firstName")
     .trim()
