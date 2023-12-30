@@ -1,9 +1,19 @@
 import { NavLink, useNavigate } from "react-router-dom";
+import { useContext, useEffect } from "react";
+import { LoginContext } from "../../App";
 
 // Component that calls all the header components
 
 function Header() {
+  const [loggedIn, setLoggedIn] = useContext(LoginContext);
+
   const navigate = useNavigate();
+
+  useEffect(() => {
+    if (loggedIn === false) {
+      navigate("/login");
+    }
+  }, [loggedIn]);
 
   const handleLogout = async (e) => {
     e.preventDefault();
@@ -19,7 +29,7 @@ function Header() {
         },
       });
       if (response.ok) {
-        navigate("/login");
+        setLoggedIn(false);
       } else {
         console.error("Error creating user:", response.status);
       }
@@ -33,10 +43,19 @@ function Header() {
       <NavLink to="/blogs"> All Blogs</NavLink>
       <NavLink to="/users"> All Users</NavLink>
       <NavLink to="/signup"> Sign Up</NavLink>
-      <NavLink to="/login"> Login</NavLink>
-      <form onSubmit={handleLogout}>
-        <button type="submit">Logout</button>
-      </form>
+      {!loggedIn ? (
+        <NavLink to="/login"> Login</NavLink>
+      ) : (
+        <form onSubmit={handleLogout}>
+          <button type="submit">Logout</button>
+        </form>
+      )}
+      {/* <NavLink to="/login"> Login</NavLink>
+      {loggedIn && (
+        <form onSubmit={handleLogout}>
+          <button type="submit">Logout</button>
+        </form>
+      )} */}
     </div>
   );
 }
