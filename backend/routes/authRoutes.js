@@ -7,6 +7,16 @@ const loginController = require("../controllers/loginController");
 // const login = require("../strategies/authentication");
 const { login, checkLoggedIn } = require("../strategies/authentication");
 
+router.get("/", loginController.check_if_user_logged_in);
+
+router.get("/check-auth", (req, res, next) => {
+  if (req.isAuthenticated()) {
+    res.status(200).json({ authenticated: true, user: req.user });
+  } else {
+    res.status(401).json({ authenticated: false });
+  }
+});
+
 // POST signup form
 router.post("/signup", loginController.signup_attempt_post);
 
