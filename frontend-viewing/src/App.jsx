@@ -15,31 +15,32 @@ export const LoginContext = createContext();
 
 function App() {
   const [count, setCount] = useState(0);
-  const [LoggedIn, setLoggedIn] = useState(false);
+  const [loggedIn, setLoggedIn] = useState(false);
 
-  // useEffect(() => {
-  //   console.log("checking");
-  //   fetch("http://localhost:3000/check-auth", {
-  //     credentials: "include",
-  //     mode: "cors",
-  //     method: "GET",
-  //     headers: {
-  //       "Content-Type": "application/json",
-  //     },
-  //   })
-  //     .then((response) => {
-  //       console.log(response.ok);
-  //       if (response.ok) {
-  //         setLoggedIn(true);
-  //       } else {
-  //         setLoggedIn(false);
-  //       }
-  //     })
-  //     .catch();
-  // }, []);
+  // runs on page load and checks if a session cookie is valid
+  // then updates loggedIn state
+  useEffect(() => {
+    fetch("http://localhost:3000/check-auth", {
+      credentials: "include",
+      mode: "cors",
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    })
+      .then((response) => {
+        console.log(response.ok);
+        if (response.ok) {
+          setLoggedIn(true);
+        } else {
+          setLoggedIn(false);
+        }
+      })
+      .catch();
+  }, []);
 
   return (
-    <LoginContext.Provider value={[LoggedIn, setLoggedIn]}>
+    <LoginContext.Provider value={[loggedIn, setLoggedIn]}>
       <>
         <div className="card">
           <button onClick={() => setCount((count) => count + 1)}>
