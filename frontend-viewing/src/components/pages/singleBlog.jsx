@@ -1,11 +1,13 @@
 import BlogDetail from "../blog-components/blogDetail/blogDetail";
 import BlogHeader from "../blog-components//blogDetail/blogHeader";
 import BlogComments from "../blog-components/blogDetail/blogComments";
+import CommentForm from "../addComment/commentForm";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 
 function SingleBlog() {
   const [blog, setBlog] = useState(null);
+  const [update, setUpdate] = useState(false);
 
   const { blogId } = useParams();
 
@@ -25,7 +27,7 @@ function SingleBlog() {
       .catch((error) => {
         console.error("Error fetching data:", error);
       });
-  }, []);
+  }, [update]);
 
   return (
     <div className="singleBlogContainer">
@@ -38,6 +40,9 @@ function SingleBlog() {
       ) : (
         <p>Loading blog...</p>
       )}
+      <div className="addCommentContainer">
+        <CommentForm {...blog} update={update} setUpdate={setUpdate} />
+      </div>
     </div>
   );
 }
