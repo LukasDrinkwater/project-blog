@@ -10,6 +10,7 @@ const { login, checkLoggedIn } = require("../strategies/authentication");
 router.get("/", loginController.check_if_user_logged_in);
 
 router.get("/check-auth", (req, res, next) => {
+  console.log(req.user._id);
   if (req.isAuthenticated()) {
     res.status(200).json({ authenticated: true, user: req.user });
   } else {
