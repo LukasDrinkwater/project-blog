@@ -1,19 +1,11 @@
-import { NavLink, useNavigate } from "react-router-dom";
-import { useContext, useEffect } from "react";
+import { NavLink } from "react-router-dom";
+import { useContext } from "react";
 import { LoginContext } from "../../App";
 
 // Component that calls all the header components
 
 function Header() {
   const [loggedIn, setLoggedIn] = useContext(LoginContext);
-
-  const navigate = useNavigate();
-
-  useEffect(() => {
-    if (loggedIn === false) {
-      navigate("/login");
-    }
-  }, [loggedIn]);
 
   const handleLogout = async (e) => {
     e.preventDefault();
