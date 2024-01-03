@@ -20,7 +20,8 @@ const User = require("./models/user");
 const indexRouter = require("./routes/index");
 const usersRouter = require("./routes/users");
 const blogRouter = require("./routes/blogRoutes");
-const authRoutes = require("./routes/authRoutes");
+const authRouter = require("./routes/authRoutes");
+const commentRouter = require("./routes/commentRoutes");
 
 const app = express();
 
@@ -95,8 +96,9 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 // Routes setup
-app.use("/", authRoutes);
+app.use("/", authRouter);
 app.use("/blogs", blogRouter);
+app.use("/blogs/:blogId/comment", commentRouter);
 // app.use("/", indexRouter);
 app.use("/users", usersRouter);
 
