@@ -15,28 +15,38 @@ export const LoginContext = createContext();
 
 function App() {
   const [count, setCount] = useState(0);
-  const [loggedIn, setLoggedIn] = useState(false);
+  const [loggedIn, setLoggedIn] = useState({ loggedIn: false, admin: false });
+  // const [loggedIn, setLoggedIn] = useState(false);
 
-  // runs on page load and checks if a session cookie is valid
-  // then updates loggedIn state
+  // runs on first page load. Initial load or after a user leaves and comes back to the
+  // site and the session cookie still exists. Then updates loggedIn state
   useEffect(() => {
-    fetch("http://localhost:3000/check-auth", {
-      credentials: "include",
-      mode: "cors",
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-      },
-    })
-      .then((response) => {
-        console.log(response.ok);
+    const fetchData = async () => {
+      try {
+        const response = await fetch("http://localhost:3000/check-auth", {
+          credentials: "include",
+          mode: "cors",
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+          },
+        });
+        // console.log(response);
         if (response.ok) {
-          setLoggedIn(true);
+          const data = await response.json();
+
+          setLoggedIn({ loggedIn: true, admin: false });
+          if (data.user.admin) {
+            setLoggedIn({ loggedIn: true, admin: true });
+          }
         } else {
-          setLoggedIn(false);
+          setLoggedIn({ loggedIn: false, admin: false });
         }
-      })
-      .catch();
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    fetchData();
   }, []);
 
   return (
