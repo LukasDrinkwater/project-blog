@@ -154,31 +154,31 @@ exports.blog_update_post = [
   }),
 ];
 
-exports.blog_add_comment_post = [
-  body("commentText", "Comment must be more than 1 character")
-    .trim()
-    .isLength({ min: 1 })
-    .escape(),
+// exports.blog_add_comment_post = [
+//   body("commentText", "Comment must be more than 1 character")
+//     .trim()
+//     .isLength({ min: 1 })
+//     .escape(),
 
-  asyncHandler(async (req, res, next) => {
-    console.log();
-    const errors = validationResult(req);
-    if (!errors.isEmpty()) {
-      res.status(400).json({ errors }).send();
-    } else {
-      const comment = new Comment({
-        blog: req.body.blogId,
-        user: req.user._id,
-        text: req.body.commentText,
-      });
+//   asyncHandler(async (req, res, next) => {
+//     console.log();
+//     const errors = validationResult(req);
+//     if (!errors.isEmpty()) {
+//       res.status(400).json({ errors }).send();
+//     } else {
+//       const comment = new Comment({
+//         blog: req.body.blogId,
+//         user: req.user._id,
+//         text: req.body.commentText,
+//       });
 
-      try {
-        await comment.save();
-      } catch (error) {
-        console.log(error.message);
-        res.status(422).json(error);
-      }
-      res.status(201).send("Comment added");
-    }
-  }),
-];
+//       try {
+//         await comment.save();
+//       } catch (error) {
+//         console.log(error.message);
+//         res.status(422).json(error);
+//       }
+//       res.status(201).send("Comment added");
+//     }
+//   }),
+// ];
