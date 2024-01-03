@@ -35,7 +35,7 @@ function Header() {
       <NavLink to="/blogs"> All Blogs</NavLink>
       <NavLink to="/users"> All Users</NavLink>
       <NavLink to="/signup"> Sign Up</NavLink>
-      {!loggedIn ? (
+      {!loggedIn.loggedIn ? (
         <NavLink to="/login"> Login</NavLink>
       ) : (
         <form onSubmit={handleLogout}>
