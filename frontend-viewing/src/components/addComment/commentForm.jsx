@@ -1,8 +1,8 @@
 import { useState, useContext } from "react";
 import { LoginContext } from "../../App";
 
-function CommentForm({ blog, _id, update, setUpdate }) {
-  const [loggedIn, setLoggedIn] = useContext(LoginContext);
+function CommentForm({ update, setUpdate, blog, _id }) {
+  const [loggedIn] = useContext(LoginContext);
 
   const [error, setError] = useState("");
   const [commentText, setCommentText] = useState("");
@@ -12,7 +12,7 @@ function CommentForm({ blog, _id, update, setUpdate }) {
 
     try {
       const response = await fetch(
-        `http://localhost:3000/blogs/${blog._id}/comment`,
+        `http://localhost:3000/blogs/${blog._id}/comment/add`,
         {
           credentials: "include",
           mode: "cors",
@@ -36,12 +36,10 @@ function CommentForm({ blog, _id, update, setUpdate }) {
       console.error("Error:", error.message);
     }
   };
-  // console.log(`http://localhost:3000/${_id}/comment`);
-  // console.log(blog.content);
 
   return (
     <>
-      {loggedIn ? (
+      {loggedIn.loggedIn ? (
         <form onSubmit={handleSubmitComment}>
           <label htmlFor="commentText">Post Comment</label>
           <input
