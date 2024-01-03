@@ -7,7 +7,7 @@ const loginController = require("../controllers/loginController");
 // const login = require("../strategies/authentication");
 const { login, checkLoggedIn } = require("../strategies/authentication");
 
-router.get("/", loginController.check_if_user_logged_in);
+// router.get("/", loginController.check_if_user_logged_in);
 
 router.get("/check-auth", (req, res, next) => {
   console.log(req.user._id);
