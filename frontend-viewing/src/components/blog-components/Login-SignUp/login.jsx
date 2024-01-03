@@ -13,7 +13,7 @@ function Login() {
   const [loggedIn, setLoggedIn] = useContext(LoginContext);
 
   useEffect(() => {
-    if (loggedIn === true) {
+    if (loggedIn.loggedIn === true) {
       navigate("/blogs");
     }
   });
@@ -35,12 +35,13 @@ function Login() {
           password,
         }),
       });
-
       if (response.ok) {
-        console.log("logged in");
-        // Redirect
-        setLoggedIn(true);
-        // navigate("/blogs");
+        const data = await response.json();
+
+        setLoggedIn({ loggedIn: true, admin: false });
+        if (data.user.admin) {
+          setLoggedIn({ loggedIn: true, admin: true });
+        }
       } else {
         console.error("Error logging in:", response.status);
       }
