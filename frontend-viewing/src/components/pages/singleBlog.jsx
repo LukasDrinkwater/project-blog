@@ -1,3 +1,5 @@
+import "./singleBlog.css";
+
 import BlogDetail from "../blog-components/blogDetail/blogDetail";
 import BlogHeader from "../blog-components//blogDetail/blogHeader";
 import BlogComments from "../blog-components/blogDetail/blogComments";
