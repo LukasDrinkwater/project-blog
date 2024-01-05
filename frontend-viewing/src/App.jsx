@@ -52,23 +52,17 @@ function App() {
   return (
     <LoginContext.Provider value={[loggedIn, setLoggedIn]}>
       <>
-        <div className="card">
-          <button onClick={() => setCount((count) => count + 1)}>
-            count is {count}
-          </button>
-          <p>
-            Edit <code>src/App.jsx</code> and save to test HMR
-          </p>
-        </div>
         <div className="content">
           <Header />
-          <Routes>
-            <Route path="/" Component={BlogList}></Route>
-            <Route path="/blogs" Component={BlogList}></Route>
-            <Route path="/blogs/:blogId" Component={SingleBlog} />
-            <Route path="/login" Component={LoginPage} />
-            <Route path="/signup" Component={SignUpPage} />
-          </Routes>
+          <div className="mainContainer">
+            <Routes>
+              <Route path="/" Component={BlogList}></Route>
+              <Route path="/blogs" Component={BlogList}></Route>
+              <Route path="/blogs/:blogId" Component={SingleBlog} />
+              <Route path="/login" Component={LoginPage} />
+              <Route path="/signup" Component={SignUpPage} />
+            </Routes>
+          </div>
         </div>
       </>
     </LoginContext.Provider>
