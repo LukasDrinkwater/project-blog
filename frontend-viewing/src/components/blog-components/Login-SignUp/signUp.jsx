@@ -60,60 +60,74 @@ function SignUp() {
       <div className="signUpFormContainer">
         {/* <form action="http://localhost:3000/signup" method="POST"> */}
         <form onSubmit={handleSubmit}>
-          <label htmlFor="firstName">First Name</label>
-          <input
-            name="firstName"
-            id="firstName"
-            type="text"
-            placeholder=""
-            value={firstName}
-            onChange={(e) => setFirstName(e.target.value)}
-          ></input>
-          <label htmlFor="lastName">Last Name</label>
-          <input
-            id="lastName"
-            name="lastName"
-            type="text"
-            placeholder=""
-            value={lastName}
-            onChange={(e) => setLastName(e.target.value)}
-          ></input>
-          <label htmlFor="username">Username</label>
-          <input
-            name="username"
-            id="username"
-            type="text"
-            placeholder=""
-            value={username}
-            onChange={(e) => setUsername(e.target.value)}
-          ></input>
-          <label htmlFor="password">Password</label>
-          <input
-            name="password"
-            id="password"
-            type="password"
-            placeholder=""
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-          ></input>
-          <label htmlFor="email">Email Address</label>
-          <input
-            name="email"
-            id="email"
-            type="email"
-            placeholder=""
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-          ></input>
-          <label htmlFor="country">Country</label>
-          <input
-            name="country"
-            id="country"
-            type="text"
-            placeholder=""
-            value={country}
-            onChange={(e) => setCountry(e.target.value)}
-          ></input>
+          <div className="formGroup">
+            <label htmlFor="firstName">First Name</label>
+            <input
+              name="firstName"
+              id="firstName"
+              type="text"
+              placeholder=""
+              value={firstName}
+              onChange={(e) => setFirstName(e.target.value)}
+            ></input>
+          </div>
+          <div className="formGroup">
+            <label htmlFor="lastName">Last Name</label>
+            <input
+              id="lastName"
+              name="lastName"
+              type="text"
+              placeholder=""
+              value={lastName}
+              onChange={(e) => setLastName(e.target.value)}
+            ></input>
+          </div>
+          <div className="formGroup">
+            <label htmlFor="username">Username</label>
+            <input
+              name="username"
+              id="username"
+              type="text"
+              placeholder=""
+              value={username}
+              onChange={(e) => setUsername(e.target.value)}
+            ></input>
+          </div>
+          <div className="formGroup">
+            <label htmlFor="password">Password</label>
+            <input
+              name="password"
+              id="password"
+              type="password"
+              placeholder=""
+              minLength={5}
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+            ></input>
+          </div>
+          <div className="formGroup">
+            <label htmlFor="email">Email Address</label>
+            <input
+              name="email"
+              id="email"
+              type="email"
+              placeholder=""
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+            ></input>
+          </div>
+          <div className="formGroup">
+            <label htmlFor="country">Country</label>
+            <input
+              name="country"
+              id="country"
+              type="text"
+              placeholder=""
+              value={country}
+              onChange={(e) => setCountry(e.target.value)}
+            ></input>
+          </div>
+
           <label htmlFor="admin">Admin</label>
           <input
             name="admin"
@@ -123,7 +137,9 @@ function SignUp() {
             value={isChecked}
             onChange={changeTickBox}
           />
-          <button type="submit">Signup</button>
+          <div className="formGroup">
+            <button type="submit">Signup</button>
+          </div>
         </form>
       </div>
     </div>
