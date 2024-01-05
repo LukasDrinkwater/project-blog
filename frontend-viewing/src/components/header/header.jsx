@@ -1,3 +1,6 @@
+// Styles
+import "./header.css";
+
 import { NavLink } from "react-router-dom";
 import { useContext } from "react";
 import { LoginContext } from "../../App";
@@ -38,16 +41,12 @@ function Header() {
       {!loggedIn.loggedIn ? (
         <NavLink to="/login"> Login</NavLink>
       ) : (
-        <form onSubmit={handleLogout}>
-          <button type="submit">Logout</button>
-        </form>
+        // <form onSubmit={handleLogout}>
+        <button type="submit" onClick={handleLogout}>
+          Logout
+        </button>
+        // </form>
       )}
-      {/* <NavLink to="/login"> Login</NavLink>
-      {loggedIn && (
-        <form onSubmit={handleLogout}>
-          <button type="submit">Logout</button>
-        </form>
-      )} */}
     </div>
   );
 }
