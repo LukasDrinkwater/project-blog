@@ -1,5 +1,5 @@
 const mongoose = require("mongoose");
-
+const { format } = require("date-fns");
 const Schema = mongoose.Schema;
 
 // Blog
@@ -13,8 +13,7 @@ const CommentSchema = new Schema(
     user: { type: Schema.Types.ObjectId, ref: "User", required: true },
     text: { type: String, required: true },
   },
-  { timestamps: true },
-  { toJSON: { virtuals: true } }
+  { timestamps: true, toJSON: { virtuals: true } }
 );
 
 // virtuals
@@ -24,20 +23,24 @@ CommentSchema.virtual("url").get(function () {
 });
 
 CommentSchema.virtual("createdAtFormatted").get(function () {
-  const createdAt = this.createdAt;
-
-  // Format the createdAt timestamp using toLocaleString
-  const formattedCreatedAt = createdAt.toLocaleString("en-US", {
-    weekday: "short",
-    month: "short",
-    day: "numeric",
-    year: "numeric",
-    hour: "numeric",
-    minute: "numeric",
-    second: "numeric",
-    timeZoneName: "short",
-  });
-
-  return formattedCreatedAt;
+  return format(this.updatedAt, "dd/MM/yyyy HH:mm");
 });
+
+// CommentSchema.virtual("createdAtFormatted").get(function () {
+//   const createdAt = this.createdAt;
+
+//   // Format the createdAt timestamp using toLocaleString
+//   const formattedCreatedAt = createdAt.toLocaleString("en-US", {
+//     weekday: "short",
+//     month: "short",
+//     day: "numeric",
+//     year: "numeric",
+//     hour: "numeric",
+//     minute: "numeric",
+//     second: "numeric",
+//     timeZoneName: "short",
+//   });
+
+//   return formattedCreatedAt;
+// });
 module.exports = mongoose.model("Comment", CommentSchema);

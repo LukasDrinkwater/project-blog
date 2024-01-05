@@ -1,4 +1,6 @@
 const mongoose = require("mongoose");
+const { format } = require("date-fns");
+
 const Schema = mongoose.Schema;
 
 // Object link to user
@@ -14,8 +16,7 @@ const BlogSchema = new Schema(
     content: { type: String, required: true },
     published: { type: Boolean, required: true },
   },
-  { timestamps: true },
-  { toJSON: { virtuals: true } }
+  { timestamps: true, toJSON: { virtuals: true } }
 );
 
 BlogSchema.virtual("url").get(function () {
@@ -23,21 +24,25 @@ BlogSchema.virtual("url").get(function () {
 });
 
 BlogSchema.virtual("createdAtFormatted").get(function () {
-  const createdAt = this.createdAt;
-
-  // Format the createdAt timestamp using toLocaleString
-  const formattedCreatedAt = createdAt.toLocaleString("en-US", {
-    weekday: "short",
-    month: "short",
-    day: "numeric",
-    year: "numeric",
-    hour: "numeric",
-    minute: "numeric",
-    second: "numeric",
-    timeZoneName: "short",
-  });
-
-  return formattedCreatedAt;
+  return format(this.updatedAt, "dd/MM/yyyy HH:mm");
 });
+
+// BlogSchema.virtual("createdAtFormatted").get(function () {
+//   const createdAt = this.createdAt;
+
+//   // Format the createdAt timestamp using toLocaleString
+//   const formattedCreatedAt = createdAt.toLocaleString("en-US", {
+//     weekday: "short",
+//     month: "short",
+//     day: "numeric",
+//     year: "numeric",
+//     hour: "numeric",
+//     minute: "numeric",
+//     second: "numeric",
+//     timeZoneName: "short",
+//   });
+
+//   return formattedCreatedAt;
+// });
 
 module.exports = mongoose.model("Blog", BlogSchema);
