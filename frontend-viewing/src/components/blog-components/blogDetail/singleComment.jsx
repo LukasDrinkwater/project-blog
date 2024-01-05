@@ -38,10 +38,16 @@ function SingleComment({
 
   return (
     <div className="commentCard">
-      <p>{user.fullName}</p>
-      <p>{text}</p>
-      <p>{createdAtFormatted}</p>
-      <button onClick={deleteCommentClick}>REMOVE</button>
+      <div className="commentUserInfo">
+        <p id="commentUser">{user.fullName}</p>
+        <p id="commentDate">{createdAtFormatted}</p>
+      </div>
+      <div className="commentContent">
+        <section>
+          <p id="commentText">{text}</p>
+        </section>
+        <button onClick={deleteCommentClick}>REMOVE</button>
+      </div>
       <p>{error}</p>
     </div>
   );

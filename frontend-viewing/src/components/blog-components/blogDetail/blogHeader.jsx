@@ -4,9 +4,11 @@ function BlogHeader({ blog }) {
   return (
     <div className="blogHeader">
       <h1>{blog.title}</h1>
-      <p>{blog.user.fullName}</p>
-      <p>{blog.user.country}</p>
-      <p>{blog.createdAtFormatted}</p>
+      <div className="singleBlogDetail">
+        <p>Author: {blog.user.fullName}</p>
+        <p>From: {blog.user.country}</p>
+        <p>Posted: {blog.createdAtFormatted}</p>
+      </div>
     </div>
   );
 }
