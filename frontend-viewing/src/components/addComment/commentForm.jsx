@@ -55,7 +55,9 @@ function CommentForm({ update, setUpdate, blog, _id }) {
           <button type="submit">Post</button>
         </form>
       ) : (
-        <p>Please login to post a comment.</p>
+        <div className="loginWarning">
+          <p>Please login to post a comment.</p>
+        </div>
       )}
       {error && <p>Error: {error}</p>}
     </>
