@@ -9,11 +9,12 @@ const asyncHandler = require("express-async-handler");
 // GET all blogs
 exports.blog_list = asyncHandler(async (req, res, next) => {
   // console.log("get blogs", req.user);
+
   const allBlogs = await Blog.find()
     .populate("user")
     .sort({ createdAt: 1 })
     .exec();
-
+  console.log(allBlogs[0].createdAtFormatted);
   res.json(allBlogs);
 });
 
