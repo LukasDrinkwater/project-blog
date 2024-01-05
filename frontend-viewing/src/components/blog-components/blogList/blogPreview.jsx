@@ -1,17 +1,18 @@
 // Preview of the blog
 import { Link } from "react-router-dom";
 
-function BlogPreview({ title, user, country, createdAtFormatted, _id }) {
+function BlogPreview({ title, user, createdAtFormatted, _id }) {
+  // console.log("country", createdAtFormatted);
   return (
     <div className="blogPreview">
       <Link to={`${_id}`}>
-        <p>{title}</p>
+        <h2>{title}</h2>
       </Link>
 
       <div className="previewDetail">
-        <p>{user.fullName}</p>
-        <p>{country}</p>
-        <p>{createdAtFormatted}</p>
+        <p>Author: {user.fullName}</p>
+        <p>From: {user.country}</p>
+        <p>Posted:{createdAtFormatted}</p>
       </div>
     </div>
   );
