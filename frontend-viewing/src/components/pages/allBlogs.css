@@ -1,3 +1,22 @@
+.allBlogsContainer {
+  display: flex;
+  flex-direction: column;
+  padding: 2rem;
+  /* width: min(90%, 1000px); */
+  /* border: 3px solid blue; */
+}
+
 .blogPreview {
   background-color: #c7c7c7;
+  margin-bottom: 1rem;
+  border-radius: 8px;
+}
+
+.previewDetail {
+  display: flex;
+  justify-content: center;
+}
+
+.previewDetail p {
+  margin-left: 1rem;
 }
