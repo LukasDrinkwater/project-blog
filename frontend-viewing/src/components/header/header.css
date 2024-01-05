@@ -1,0 +1,19 @@
+.headerContainer {
+  background-color: #1f7a8c;
+  display: flex;
+  justify-content: center;
+  /* min-height: 10rem; */
+  align-items: center;
+}
+
+.headerContainer button {
+  display: flex;
+
+  margin: 0px;
+  height: 50%;
+}
+
+.headerContainer a {
+  font-size: 1.5rem;
+  margin: 1rem;
+}
