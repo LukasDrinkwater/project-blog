@@ -3,8 +3,7 @@ var router = express.Router();
 const passport = require("passport");
 
 const loginController = require("../controllers/loginController");
-// const authenticate = require("../strategies/authentication");
-// const login = require("../strategies/authentication");
+
 const { login, checkLoggedIn } = require("../strategies/authentication");
 
 // router.get("/", loginController.check_if_user_logged_in);
