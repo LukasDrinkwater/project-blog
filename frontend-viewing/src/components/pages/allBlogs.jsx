@@ -26,7 +26,14 @@ function BlogList() {
   return (
     <div className="allBlogsContainer">
       {allBlogs.length > 0 ? (
-        allBlogs.map((blog) => <BlogPreview key={blog._id} {...blog} />)
+        allBlogs.map((blog) => (
+          // blog.published &&
+          <BlogPreview
+            key={blog._id}
+            {...blog}
+            createdAtFormatted={blog.createdAtFormatted}
+          />
+        ))
       ) : (
         <div>Loading...</div>
       )}
