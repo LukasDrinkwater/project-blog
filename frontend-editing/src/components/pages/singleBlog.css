@@ -1,0 +1,140 @@
+.singleBlogContainer {
+  display: flex;
+  flex-direction: column;
+  /* margin: 0rem 2rem; */
+  background-color: #bfdbf7;
+}
+
+.blogHeader {
+  display: flex;
+  flex-direction: column;
+  /* background-color: #1f7a8c; */
+}
+
+.blogHeader h1 {
+  /* background-color: #1f7a8c; */
+  padding: 1rem;
+}
+
+.singleBlogDetail {
+  display: flex;
+  justify-content: center;
+  margin: 1rem;
+}
+
+.singleBlogContainer p {
+  margin-left: 1rem;
+}
+
+.blogContainer {
+  margin: 0 1rem 0 1rem;
+}
+
+.blogContainer p {
+  margin: 0px;
+  padding: 0px;
+}
+
+/* COMMENT STYLES */
+
+.commentsContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.commentCard {
+  display: flex;
+  flex-direction: column;
+  background-color: #c7c7c7;
+  /* justify-content: start; */
+  align-items: start;
+  margin: 0 1rem 1rem 1rem;
+  padding: 1rem 0 1rem 0;
+  border-radius: 8px;
+  max-width: 20rem;
+  /* width: 100%; */
+  width: min(100%, 1000px);
+  height: fit-content;
+
+  flex-grow: 1;
+}
+
+.commentUserInfo {
+  display: flex;
+  flex-direction: row;
+  align-items: start;
+  margin: 0 0 0.5rem 0;
+}
+
+.commentContent {
+  display: flex;
+  align-items: center;
+}
+
+.commentContent p {
+  text-align: start;
+}
+
+.commentCard button {
+  display: flex;
+  margin: 0 0 0 1rem;
+  height: 50%;
+  font-size: rem;
+  padding: 0.2rem;
+}
+
+h2 {
+  margin: 1rem;
+  font-size: 1.5rem;
+}
+
+/* COMMENT FORM STYLES */
+
+.loginWarning {
+  font-size: 1.5rem;
+  font-weight: bold;
+  margin: 0 0 1rem 0;
+}
+
+.addCommentContainer {
+  /* display: flex; */
+  background-color: #c7c7c7;
+  width: fit-content;
+  margin: 0 1rem 1rem 1rem;
+  align-self: center;
+  border-radius: 8px;
+}
+
+.addCommentContainer form {
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  /* align-items: flex-start; */
+}
+
+.addCommentContainer form label {
+  font-weight: bold;
+  padding: 0 0 0.5rem 0;
+}
+
+.addCommentContainer form input {
+  width: 100%;
+  max-width: 425px;
+  padding: 0.5rem 0 0.5rem 0;
+  font-size: 1rem;
+  outline: none;
+  border: 1px solid #dddddd;
+  border-radius: 8px;
+
+  /* background: #c7c7c7; */
+  transition: background 0.25s, border-color 0.25s, color 0.25;
+}
+
+.addCommentContainer button {
+  margin: 0.5rem 0 0 0;
+}
+
+.addCommentContainer form > * {
+  align-self: flex-start;
+}

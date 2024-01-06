@@ -1,35 +1,70 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import { useState, createContext, useEffect } from "react";
+import { Route, Routes } from "react-router-dom";
+
+import "./App.css";
+
+// IMPORT COMPONENTS
+
+import { Header } from "./components/header/header";
+import BlogList from "./components/pages/allBlogs";
+import SingleBlog from "./components/pages/singleBlog";
+import LoginPage from "./components/pages/loginPage";
+import SignUpPage from "./components/pages/signUpPage";
+
+export const LoginContext = createContext();
 
 function App() {
-  const [count, setCount] = useState(0)
+  const [loggedIn, setLoggedIn] = useState({ loggedIn: false, admin: false });
+
+  // runs on first page load. Initial load or after a user leaves and comes back to the
+  // site and the session cookie still exists. Then updates loggedIn state
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await fetch("http://localhost:3000/check-auth", {
+          credentials: "include",
+          mode: "cors",
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+          },
+        });
+        // console.log(response);
+        if (response.ok) {
+          const data = await response.json();
+
+          setLoggedIn({ loggedIn: true, admin: false });
+          if (data.user.admin) {
+            setLoggedIn({ loggedIn: true, admin: true });
+          }
+        } else {
+          setLoggedIn({ loggedIn: false, admin: false });
+        }
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    fetchData();
+  }, []);
 
   return (
-    <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
+    <LoginContext.Provider value={[loggedIn, setLoggedIn]}>
+      <>
+        <div className="content">
+          <Header />
+          <div className="mainContainer">
+            <Routes>
+              <Route path="/" Component={BlogList}></Route>
+              <Route path="/blogs" Component={BlogList}></Route>
+              <Route path="/blogs/:blogId" Component={SingleBlog} />
+              <Route path="/login" Component={LoginPage} />
+              <Route path="/signup" Component={SignUpPage} />
+            </Routes>
+          </div>
+        </div>
+      </>
+    </LoginContext.Provider>
+  );
 }
 
-export default App
+export default App;
