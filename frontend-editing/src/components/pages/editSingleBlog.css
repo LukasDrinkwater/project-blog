@@ -1,0 +1,23 @@
+.editSingleBlogContainer {
+  background-color: #bfdbf7;
+  display: flex;
+  flex-direction: column;
+  /* width: min(75%, 1000px); */
+  width: 100%;
+}
+
+.editBlogFormContainer {
+  display: flex;
+  /* flex-direction: column; */
+  justify-content: center;
+  width: 100%;
+}
+
+.editBlogFormContainer form {
+  display: flex;
+  flex-direction: column;
+  /* align-items: center; */
+  /* align-self: center; */
+  width: 90%;
+  /* width: min(75%, 1000px); */
+}
