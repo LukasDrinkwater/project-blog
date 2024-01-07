@@ -19,6 +19,6 @@ router.get("/:blogId", blogController.blog_detail);
 router.get("/:blogId/edit", blogController.blog_update_get);
 
 // POST update specific blog
-router.put("/blogId/edit", blogController.blog_update_put);
+router.post("/blogId/edit", blogController.blog_update_put);
 
 module.exports = router;

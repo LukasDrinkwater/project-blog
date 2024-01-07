@@ -5,21 +5,18 @@
   "version": "0.2.0",
   "configurations": [
     {
-      "name": "Attach",
-      "port": 9229,
+      "name": "Attach by Process ID",
+      "processId": "${command:PickProcess}",
       "request": "attach",
       "skipFiles": ["<node_internals>/**"],
       "type": "node"
     },
     {
-      "name": "React Frontend",
-      "type": "chrome",
+      "type": "node",
       "request": "launch",
-      "url": "http://localhost:5000", // Update this with the URL of your React app
-      "webRoot": "${workspaceFolder}/frontend-editing/src", // Update this with the root directory of your React app
-      "sourceMapPathOverrides": {
-        "webpack:///src/*": "${webRoot}/*"
-      }
+      "name": "Launch Program",
+      "skipFiles": ["<node_internals>/**"],
+      "program": "${file}"
     }
   ]
 }

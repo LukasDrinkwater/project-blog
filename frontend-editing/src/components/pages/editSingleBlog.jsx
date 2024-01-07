@@ -63,7 +63,7 @@ function EditSingleBlog({ blog, enableEdit, setEnableEdit }) {
         {
           credentials: "include",
           mode: "cors",
-          method: "PUT",
+          method: "POST",
           headers: {
             "Content-Type": "application/json",
           },

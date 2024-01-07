@@ -50,11 +50,15 @@ function SingleBlog() {
     <>
       {!enableEdit ? (
         <div className="editBlogButton">
-          <button onClick={handleEditBlogClick}>Edit blog.</button>
+          <button type="button" onClick={handleEditBlogClick}>
+            Edit blog.
+          </button>
         </div>
       ) : (
         <div className="ViewEditedBlogButton">
-          <button onClick={handleEditBlogClick}>View blog.</button>
+          <button type="button" onClick={handleEditBlogClick}>
+            View blog.
+          </button>
         </div>
       )}
       {!enableEdit ? (
