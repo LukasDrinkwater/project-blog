@@ -45,7 +45,7 @@ app.use(express.static(path.join(__dirname, "public")));
 app.use(
   //cors is needed to allow requests from the React front end
   cors({
-    origin: "http://localhost:5173",
+    origin: ["http://localhost:5173", "http://localhost:5000"],
     methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
     credentials: true,
     allowedHeaders: ["Content-Type", "Authorization"],
