@@ -58,6 +58,7 @@ function EditSingleBlog({ blog, enableEdit, setEnableEdit }) {
     e.preventDefault();
 
     try {
+      console.log("fetching");
       const response = await fetch(
         `http://localhost:3000/blogs/${blogId}/edit`,
         {
@@ -108,9 +109,8 @@ function EditSingleBlog({ blog, enableEdit, setEnableEdit }) {
               onInput={(e) => autoResise(e.target)}
             />
           </div>
-          <div className="formGroup">
-            <button type="submit">Save blog.</button>
-          </div>
+
+          <button type="submit">Save blog.</button>
         </form>
       </div>
       {blogSaved && (

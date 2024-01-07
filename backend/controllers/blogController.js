@@ -115,14 +115,14 @@ exports.blog_update_get = asyncHandler(async (req, res, next) => {
 // POST request to update blog
 
 exports.blog_update_put = [
-  body("blogTitle", "Blog title must not be blank.")
-    .trim()
-    .isLength({ min: 1 })
-    .escape(),
-  body("blogContent", "Blog content must not be blank")
-    .trim()
-    .isLength({ min: 1 })
-    .escape(),
+  // body("blogTitle", "Blog title must not be blank.")
+  //   .trim()
+  //   .isLength({ min: 1 })
+  //   .escape(),
+  // body("blogContent", "Blog content must not be blank")
+  //   .trim()
+  //   .isLength({ min: 1 })
+  //   .escape(),
 
   asyncHandler(async (req, res, next) => {
     const errors = validationResult(req);
