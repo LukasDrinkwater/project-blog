@@ -10,6 +10,7 @@ import BlogList from "./components/pages/allBlogs";
 import SingleBlog from "./components/pages/singleBlog";
 import LoginPage from "./components/pages/loginPage";
 import SignUpPage from "./components/pages/signUpPage";
+import EditSingleBlog from "./components/pages/editSingleBlog";
 
 export const LoginContext = createContext();
 
@@ -57,6 +58,7 @@ function App() {
               <Route path="/" Component={BlogList}></Route>
               <Route path="/blogs" Component={BlogList}></Route>
               <Route path="/blogs/:blogId" Component={SingleBlog} />
+              {/* <Route path="/blogs/:blogId/edit" Component={EditSingleBlog} /> */}
               <Route path="/login" Component={LoginPage} />
               <Route path="/signup" Component={SignUpPage} />
             </Routes>
