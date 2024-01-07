@@ -21,29 +21,24 @@
 //   ]
 // }
 {
-  // Use IntelliSense to learn about possible attributes.
-  // Hover to view descriptions of existing attributes.
-  // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
-  "version": "0.2.0",
   "configurations": [
     {
       "name": "Attach",
       "port": 9229,
       "request": "attach",
       "skipFiles": ["<node_internals>/**"],
-      "outFiles": ["${workspaceFolder}/bin/**/*.js"],
-      "sourceMaps": true,
       "type": "node"
     },
+
     {
-      "name": "React Frontend",
-      "type": "chrome",
+      "name": "Launch Chrome",
       "request": "launch",
-      "url": "http://localhost:5000", // Update this with the URL of your React app
-      "webRoot": "${workspaceFolder}/frontend-editing/src", // Update this with the root directory of your React app
-      "sourceMapPathOverrides": {
-        "webpack:///src/*": "${webRoot}/*"
-      }
+      "type": "chrome",
+      "url": "http://localhost:5173",
+      "webRoot": "${workspaceFolder}"
     }
   ]
+  // Use IntelliSense to learn about possible attributes.
+  // Hover to view descriptions of existing attributes.
+  // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
 }
