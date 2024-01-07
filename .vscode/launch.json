@@ -15,8 +15,8 @@
       "name": "React Frontend",
       "type": "chrome",
       "request": "launch",
-      "url": "http://localhost:5173", // Update this with the URL of your React app
-      "webRoot": "${workspaceFolder}/frontend-viewing/src", // Update this with the root directory of your React app
+      "url": "http://localhost:5000", // Update this with the URL of your React app
+      "webRoot": "${workspaceFolder}/frontend-editing/src", // Update this with the root directory of your React app
       "sourceMapPathOverrides": {
         "webpack:///src/*": "${webRoot}/*"
       }
