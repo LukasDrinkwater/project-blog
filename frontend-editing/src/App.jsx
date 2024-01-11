@@ -11,6 +11,8 @@ import SingleBlog from "./components/pages/singleBlog";
 import LoginPage from "./components/pages/loginPage";
 import SignUpPage from "./components/pages/signUpPage";
 import EditSingleBlog from "./components/pages/editSingleBlog";
+import AllUsersPage from "./components/pages/allUsersPage";
+import UsersBlogs from "./components/pages/usersBlogs";
 
 export const LoginContext = createContext();
 
@@ -58,7 +60,9 @@ function App() {
               <Route path="/" Component={BlogList}></Route>
               <Route path="/blogs" Component={BlogList}></Route>
               <Route path="/blogs/:blogId" Component={SingleBlog} />
-              {/* <Route path="/blogs/:blogId/edit" Component={EditSingleBlog} /> */}
+              <Route path="/blogs/:blogId/edit" Component={EditSingleBlog} />
+              <Route path="/users" Component={AllUsersPage} />
+              <Route path="/users/:userId" Component={UsersBlogs} />
               <Route path="/login" Component={LoginPage} />
               <Route path="/signup" Component={SignUpPage} />
             </Routes>
