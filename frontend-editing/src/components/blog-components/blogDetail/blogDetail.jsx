@@ -7,9 +7,6 @@ function BlogDetail({ blog }) {
 
   return (
     <div className="blogContainer">
-      {/* <span>
-        <NavLink to="edit"> Edit blog post.</NavLink>
-      </span> */}
       <p>{blogContent}</p>
     </div>
   );
