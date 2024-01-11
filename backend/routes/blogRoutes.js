@@ -12,13 +12,15 @@ router.get("/", blogController.blog_list);
 // GET specific blog
 router.get("/:blogId", blogController.blog_detail);
 
-// // POST new comment to blog
-// router.post("/:blogId/comment", blogController.blog_add_comment_post);
+
+
+// POST update specific blog
+router.get("/:blogId/edit/test", blogController.blog_update_test);
+router.post("/:blogId/edit", blogController.blog_update_post);
 
 // GET specific blog to EDIT
 router.get("/:blogId/edit", blogController.blog_update_get);
 
-// POST update specific blog
-router.post("/blogId/edit", blogController.blog_update_put);
+
 
 module.exports = router;
