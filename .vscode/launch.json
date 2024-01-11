@@ -29,13 +29,20 @@
       "skipFiles": ["<node_internals>/**"],
       "type": "node"
     },
-
+    // {
+    //   "type": "node",
+    //   "request": "launch",
+    //   "name": "Launch Program",
+    //   "skipFiles": ["<node_internals>/**"],
+    //   "program": "${workspaceFolder}/backend/bin/www",
+    //   "outFiles": ["${workspaceFolder}/**/*.js"]
+    // }
     {
       "name": "Launch Chrome",
       "request": "launch",
       "type": "chrome",
-      "url": "http://localhost:5173",
-      "webRoot": "${workspaceFolder}"
+      "url": "http://localhost:5000",
+      "webRoot": "${workspaceFolder}/frontend-editing"
     }
   ]
   // Use IntelliSense to learn about possible attributes.
