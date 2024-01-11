@@ -3,7 +3,6 @@
 
 function BlogDetail({ blog }) {
   const blogContent = blog.content;
-  // const blogId = blog._id;
 
   return (
     <div className="blogContainer">
