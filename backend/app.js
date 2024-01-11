@@ -18,7 +18,7 @@ const User = require("./models/user");
 
 // Import Routes
 const indexRouter = require("./routes/index");
-const usersRouter = require("./routes/users");
+const usersRouter = require("./routes/userRoutes");
 const blogRouter = require("./routes/blogRoutes");
 const authRouter = require("./routes/authRoutes");
 const commentRouter = require("./routes/commentRoutes");
@@ -96,11 +96,12 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 // Routes setup
-app.use("/", authRouter);
 app.use("/blogs", blogRouter);
+
 app.use("/blogs/:blogId/comment", commentRouter);
 // app.use("/", indexRouter);
 app.use("/users", usersRouter);
+app.use("/", authRouter);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {

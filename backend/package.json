@@ -25,6 +25,7 @@
     "express-async-handler": "^1.2.0",
     "express-session": "^1.17.3",
     "express-validator": "^7.0.1",
+    "he": "^1.2.0",
     "http-errors": "~2.0.0",
     "mongoose": "^8.0.3",
     "morgan": "~1.10.0",
