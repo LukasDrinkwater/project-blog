@@ -10,6 +10,8 @@ import EditSingleBlog from "./editSingleBlog";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 
+
+
 function SingleBlog() {
   const [blog, setBlog] = useState(null);
   const [enableEdit, setEnableEdit] = useState(false);
@@ -30,7 +32,7 @@ function SingleBlog() {
             "Content-Type": "application/json",
           },
         });
-
+          
         if (response.ok) {
           const blogData = await response.json();
           setBlog(blogData);
@@ -40,7 +42,9 @@ function SingleBlog() {
       }
     };
     fetchData();
-  }, [update]);
+    // update the refresh when comments are added and also enableEdit 
+    // to update the blog when a change has been made.
+  }, [update, enableEdit]);
 
   const handleEditBlogClick = () => {
     setEnableEdit(!enableEdit);
