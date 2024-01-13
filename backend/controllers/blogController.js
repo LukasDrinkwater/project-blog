@@ -152,8 +152,37 @@ exports.blog_update_post = [
   }),
 ];
 
-exports.blog_update_test = asyncHandler(async (res, req, next) => {
-  console.log("in blog_update_test");
+exports.blog_create_post = [
+  body("title", "The title must be atleast 1 character")
+    .trim()
+    .isLength({ min: 1 })
+    .escape(),
+  body("content", "The blog content must be atleast 1 character")
+    .trim()
+    .isLength({ min: 1 })
+    .escape(),
+  body("published").isBoolean(),
 
-  res.status(200).res.json({ message: "here" }).send();
-});
+  asyncHandler(async (req, res, next) => {
+    const errors = validationResult(req);
+    console.log(req.body);
+
+    if (!errors.isEmpty()) {
+      res.status(422).send();
+    } else {
+      // create new blog
+      const blog = new Blog({
+        user: req.user._id,
+        title: req.body.title,
+        content: req.body.content,
+        published: req.body.published,
+      });
+
+      console.log("saving new blog");
+      await blog.save();
+      console.log(blog._id.toString());
+      console.log("blog saved");
+      res.status(201).send();
+    }
+  }),
+];
