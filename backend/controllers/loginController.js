@@ -65,7 +65,7 @@ exports.signup_attempt_post = [
       console.log("saving user");
       await user.save();
       console.log("user saved");
-      res.status(201).send("User created successfully");
+      res.status(201).send();
     }
   }),
 ];
