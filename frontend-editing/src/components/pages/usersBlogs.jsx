@@ -30,7 +30,6 @@ function UsersBlogs() {
         setError(error.message);
       }
     };
-    console.log(allBlogs);
     getAllUsersBlogs();
   }, []);
 
