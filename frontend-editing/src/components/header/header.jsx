@@ -37,6 +37,7 @@ function Header() {
     <div className="headerContainer">
       <NavLink to="/blogs"> All Blogs</NavLink>
       <NavLink to="/users"> All Users</NavLink>
+      <NavLink to="/blogs/newBlog"> Create new blog</NavLink>
       <NavLink to="/signup"> Sign Up</NavLink>
       {!loggedIn.loggedIn ? (
         <NavLink to="/login"> Login</NavLink>
