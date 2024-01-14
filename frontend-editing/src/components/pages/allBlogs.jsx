@@ -32,6 +32,8 @@ function BlogList() {
             key={blog._id}
             {...blog}
             createdAtFormatted={blog.createdAtFormatted}
+            allBlogs={allBlogs}
+            setAllBlogs={setAllBlogs}
           />
         ))
       ) : (
