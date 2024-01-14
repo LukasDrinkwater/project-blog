@@ -2,6 +2,7 @@ import { useState } from "react";
 
 function NewBlogForm() {
   const [error, setError] = useState("");
+  const [showBlogCreated, setShowBlogCreated] = useState(false);
   const [blogTitle, setBlogTitle] = useState("");
   const [blogContent, setBlogContent] = useState("");
   const [published, setpublished] = useState(false);
@@ -39,6 +40,15 @@ function NewBlogForm() {
 
       if (response.ok) {
         // blog created
+
+        setShowBlogCreated(!showBlogCreated);
+        setTimeout(() => {
+          setShowBlogCreated(false);
+        }, 3000);
+
+        setBlogTitle("");
+        setBlogContent("");
+        setpublished("");
       }
     } catch (error) {
       setError(error.message);
@@ -87,6 +97,11 @@ function NewBlogForm() {
           <button type="submit">Create Blog</button>
         </div>
       </form>
+      {showBlogCreated && (
+        <div>
+          <p>Blog has been created.</p>
+        </div>
+      )}
     </>
   );
 }
