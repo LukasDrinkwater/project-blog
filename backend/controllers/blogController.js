@@ -186,3 +186,17 @@ exports.blog_create_post = [
     }
   }),
 ];
+
+// POST delete specific blog
+
+exports.blog_delete_post = asyncHandler(async (req, res, next) => {
+  const blog = await Blog.findById(req.params.blogId);
+
+  if (blog === null) {
+    res.status(404).json({ error: "Cant find blog" }).send();
+  } else {
+    await Blog.findByIdAndDelete(req.params.blogId);
+
+    res.status(200).json({ message: "Blog deleted", blog }).send();
+  }
+});
