@@ -3,7 +3,15 @@ import { useContext, useState } from "react";
 import { Link, useParams, NavLink } from "react-router-dom";
 import { LoginContext } from "../../../App.jsx";
 
-function BlogPreview({ title, user, createdAtFormatted, _id, published }) {
+function BlogPreview({
+  title,
+  user,
+  createdAtFormatted,
+  _id,
+  published,
+  allBlogs,
+  setAllBlogs,
+}) {
   const userIdParam = useParams();
 
   const [loggedIn] = useContext(LoginContext);
@@ -25,7 +33,14 @@ function BlogPreview({ title, user, createdAtFormatted, _id, published }) {
         }
       );
       if (response.ok) {
-        console.log("blog removed");
+        const data = await response.json();
+        // the blog that was deleted is sent back as data.blog
+        // Update the allBlogs object to updatedAllBlogs which filters out the blog that
+        // was deleted. But using the blog that is sent back to make sure its correct.
+        const updatedAllBlogs = allBlogs.filter(
+          (blog) => blog._id !== data.blog._id
+        );
+        setAllBlogs(updatedAllBlogs);
       }
     } catch (error) {
       setError(error.message);
