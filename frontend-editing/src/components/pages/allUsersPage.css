@@ -1,0 +1,22 @@
+.allUsersContainer {
+  display: flex;
+  flex-direction: column;
+  padding: 2rem;
+  background-color: #bfdbf7;
+  width: 100%;
+  /* flex: 1; */
+  box-sizing: border-box; /* Ensure consistent box sizing */
+}
+
+.userPreview {
+  background-color: #c7c7c7;
+  margin-bottom: 1rem;
+  border-radius: 8px;
+  text-align: center;
+}
+
+.userPreviewDetail {
+  display: flex;
+  justify-content: center;
+  margin: 0 0 1em 0;
+}
