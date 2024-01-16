@@ -3,6 +3,8 @@
 import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 
+import "./usersBlogs.css";
+
 import BlogPreview from "../blog-components/blogList/blogPreview";
 
 function UsersBlogs() {
