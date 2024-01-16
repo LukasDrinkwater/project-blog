@@ -4,12 +4,16 @@
   padding: 2rem;
   /* width: min(90%, 1000px); */
   /* border: 3px solid blue; */
+  background-color: #bfdbf7;
+  width: 100%;
+  box-sizing: border-box; /* Include padding and border in the total width */
 }
 
 .blogPreview {
   background-color: #c7c7c7;
   margin-bottom: 1rem;
   border-radius: 8px;
+  text-align: center;
 }
 
 .previewDetail {
@@ -19,4 +23,24 @@
 
 .previewDetail p {
   margin-left: 1rem;
+}
+
+.deletePreviewButtonContainer {
+  display: flex;
+  justify-content: space-between; /* Distribute space evenly between buttons */
+}
+
+.deleteBlogButton,
+.publishButton {
+  flex: 1; /* Equal flex distribution for both buttons */
+  /* max-width: 48%; Set a maximum width for responsiveness */
+  margin: 0 0.5em 0.5em 0.5em;
+}
+
+.deletePreviewButtonContainer button {
+  box-sizing: border-box; /* Include padding and border in the total width */
+  white-space: normal; /* Allow text to break onto multiple lines */
+  word-wrap: break-word; /* Break words that are too long to fit */
+  height: 50px;
+  width: 80px;
 }
