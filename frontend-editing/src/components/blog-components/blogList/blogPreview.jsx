@@ -47,6 +47,41 @@ function BlogPreview({
     }
   };
 
+  const handlePublishBlog = async (e) => {
+    e.preventDefault();
+
+    try {
+      const response = await fetch(
+        `http://localhost:3000/blogs/${_id}/publish`,
+        {
+          credentials: "include",
+          mode: "cors",
+          method: "PATCH",
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
+
+      if (response.ok) {
+        const data = await response.json();
+        // loops through the current allBlogs state and if the blog matches
+        // the blog that has just been published set published to the new published
+        const updatedAllBlogs = allBlogs.map((blog) =>
+          blog._id === data._id
+            ? {
+                ...blog,
+                published: data.published,
+              }
+            : blog
+        );
+        setAllBlogs(updatedAllBlogs);
+      }
+    } catch (error) {
+      setError(error.message);
+    }
+  };
+
   return (
     <div className="blogPreview">
       {/* if its showing a blog preview on the All Users page user === iserIdParam.userId
@@ -66,14 +101,19 @@ function BlogPreview({
         <p>From: {user.country}</p>
         <p>
           Posted:
-          {loggedIn.admin && published
-            ? createdAtFormatted
-            : "Blog hasnt been posted yet."}
+          {published ? createdAtFormatted : "Blog hasnt been posted yet."}
         </p>
-        <div className="deleteBlogButton">
-          <button onClick={deleteBlogClick}>Delete blog</button>
+        <div className="deletePreviewButtonContainer">
+          {loggedIn.admin && (
+            <div className="deleteBlogButton">
+              <button onClick={deleteBlogClick}>Delete blog</button>
+            </div>
+          )}
+          {error && <div>Error: {error}</div>}
+          <div className="publishButton">
+            <button onClick={handlePublishBlog}>Publish blog</button>
+          </div>
         </div>
-        {error && <div>Error: {error}</div>}
       </div>
     </div>
   );
