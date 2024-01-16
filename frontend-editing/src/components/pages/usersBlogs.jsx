@@ -40,6 +40,7 @@ function UsersBlogs() {
           <p>{error}</p>
         </div>
       )}
+
       {allBlogs.length > 0 ? (
         allBlogs.map((blog) => (
           <BlogPreview
