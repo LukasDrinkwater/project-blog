@@ -1,0 +1,37 @@
+.newBlogContainer {
+  display: flex;
+  flex-direction: column;
+  background-color: #bfdbf7;
+  /* justify-content: center; */
+  align-items: center;
+  width: 100%;
+}
+
+.newBlogFormContainer {
+  background-color: #bfdbf7;
+
+  width: 75%;
+  max-width: 700px;
+  margin: 0 auto;
+}
+
+.formGroup {
+  display: flex;
+  flex-direction: column;
+  margin: 0.5rem 0 0.5rem 0;
+}
+
+.formGroup input {
+  margin: 0.25rem 0 0;
+  padding: 0.5rem;
+  font-size: 1rem;
+  outline: none;
+  border: 1px solid #dddddd;
+  border-radius: 8px;
+}
+
+.formGroup button {
+  width: fit-content;
+  padding: 0.5em;
+  align-self: center;
+}
