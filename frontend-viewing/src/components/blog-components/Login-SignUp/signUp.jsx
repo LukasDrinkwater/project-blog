@@ -3,13 +3,13 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 function SignUp() {
-  const [firstName, setFirstName] = useState("James");
-  const [lastName, setLastName] = useState("Doe");
-  const [username, setUsername] = useState("jamesdoe123");
-  const [password, setPassword] = useState("12345");
-  const [email, setEmail] = useState("jamesdoe@email.coom");
-  const [country, setCountry] = useState("Scotland");
-  const [isChecked, setIsChecked] = useState(true);
+  const [firstName, setFirstName] = useState("Jmes");
+  const [lastName, setLastName] = useState("");
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
+  const [email, setEmail] = useState("");
+  const [country, setCountry] = useState("");
+  const [isChecked, setIsChecked] = useState(false);
 
   const navigate = useNavigate();
 
