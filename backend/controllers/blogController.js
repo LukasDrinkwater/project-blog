@@ -200,3 +200,27 @@ exports.blog_delete_post = asyncHandler(async (req, res, next) => {
     res.status(200).json({ message: "Blog deleted", blog }).send();
   }
 });
+
+// POST set specific blog publish to true or false
+// It sets it the the opposite of what it currently is
+exports.blog_publish_patch = asyncHandler(async (req, res, next) => {
+  const currentBlog = await Blog.findById(req.params.blogId);
+  const publishedChanged = !currentBlog.published;
+
+  try {
+    const blogId = req.params.blogId;
+    const blog = await Blog.findOneAndUpdate(
+      { _id: blogId },
+      { $set: { published: publishedChanged } },
+      { new: true }
+    );
+    console.log(blog._id);
+
+    res.status(200).json(blog);
+  } catch (error) {
+    console.log(error.message);
+    res
+      .status(500)
+      .json({ error: "Issue when setting blog to published/not published" });
+  }
+});
