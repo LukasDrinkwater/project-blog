@@ -1,5 +1,6 @@
 // Component that renders all the authors.
 import { useEffect, useState } from "react";
+import "./allUsersPage.css";
 
 import UserPreview from "../blog-components/userList/userPreview";
 
