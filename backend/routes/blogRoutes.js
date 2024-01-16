@@ -22,6 +22,8 @@ router.get("/:blogId/edit", blogController.blog_update_get);
 // POST delete specific blog
 router.post("/:blogId/delete", blogController.blog_delete_post);
 
+// PATCH update specific blog published
+router.patch("/:blogId/publish", blogController.blog_publish_patch);
 // POST create new blog
 router.post("/newBlog", blogController.blog_create_post);
 
